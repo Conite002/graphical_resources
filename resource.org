@@ -1,6 +1,7 @@
 Implementation of a graphical programming language for rest-oriented resources
 
 * TODO Modeling
+[[file:resource.org][architecture]]
 * TODO Structuration of code's files according to the model
 * TODO Implementation of visual components
 ** path
@@ -71,3 +72,10 @@ design pattern that might be applied on that.
 We can alse delete the design pattern by clicking on the corresponding icon
 appeared at the top left corner of the rectangle representing the function.
 *** TODO generate a json structure to save the resource
+[[file:
+
+[[[[file:resource.png][architecture]]
+
+[[file:resource.png][architecture]]
+
+[[file:resource.png][architecture]]
