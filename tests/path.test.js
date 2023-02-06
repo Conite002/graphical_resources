@@ -1,4 +1,4 @@
-QUnit.module('Resource');
+QUnit.module('Path');
 
 QUnit.test("", assert =>{
 });

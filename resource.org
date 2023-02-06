@@ -1,0 +1,73 @@
+Implementation of a graphical programming language for rest-oriented resources
+
+* TODO Modeling
+* TODO Structuration of code's files according to the model
+* TODO Implementation of visual components
+** path
+*** TODO visual representation of a path
+The path element is used to define portions of the uri of a resource.
+It instantiates a json object with the path attribute.
+*** TODO panel of possible actions
+When hovering over a path component, a panel must appear.
+The panel presents the components that can be associates to the path:
+- delete; its representation is a trash
+- add path; its representation is a circle
+- add variable; its representation is a lozenge
+*** TODO path configuration
+when clicking on a path, a window (popup) must appear to configure the path. The
+configuration of a path consists in specifying the uri.
+*** TODO generate a json structure to save the path
+** variable
+*** TODO visual representation of a variable
+The variable element allows you to define the parameters of a resource.
+It instantiates the json object with the params attribute.
+The params attribute allows to describe the input parameter by specifying its
+ name and style.
+When the style has a template value, the variable appears in the uri(path)
+ and is enclosed in curly braces {}.
+When the style has the value query, the variable appears in the uri as a suffix
+ preceded by the ? character.
+When the style value is "plain", the variable appears in the body of the query.
+*** TODO panel of possible actions
+When hovering over a variable component, a panel must be appear.
+The panel presents the component that can be attached to a variable:
+- delete; its representation is a trash
+- applied to a path
+- applied to a decorator pattern
+- applied to an adapter pattern
+- applied to a composite pattern
+- applied to a strategy pattern
+- applied to a chain of responsibility pattern
+When it is applied to itself or to a path, a new branch must be created.
+The new branch is manifested by the presence of the resources attribute of type
+array which will contain the definition of the child resources.
+When a variable is applied to a design pattern, it is considered as an
+ additional parameter of a method.
+
+*** TODO variable configuration
+When clicking on a variable, awindow (popup) must be appear to configure the
+ variable. The configuration consists in specifying its name and style.
+*** TODO generate a json structure to save the variable
+** resource
+*** TODO visual representation of a resource
+The resource element is used to define a terminal resource.
+It creates a methods attribute in the current resource object.
+Only terminal resources can define methods.
+*** TODO panel of possible actions
+when hovering over a resource, a panel must be appear. The panel presents the
+possibles actions (http verb application):
+- applied a get method
+- applied a post method
+- applied a put method
+- applied a delete mothod
+
+*** TODO resource configuration
+When a http verb is applied on a resource, it is marked by the apparition
+of a black point on the periphery of the resource.
+When we click on this point, we can configure the function that must be called
+when this api is called.
+The configuration of the function consists in specifying its name and some
+design pattern that might be applied on that.
+We can alse delete the design pattern by clicking on the corresponding icon
+appeared at the top left corner of the rectangle representing the function.
+*** TODO generate a json structure to save the resource

@@ -1,4 +1,4 @@
-QUnit.module('Resource');
+QUnit.module('Variable');
 
 QUnit.test("", assert =>{
 });
