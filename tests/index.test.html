@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/qunit@latest/qunit/qunit.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ayajs@1.0.1/build/style.css">
-    <!-- <script src="aya.js"></script> -->
-    <script type="application/javascript"  src="https://cdn.jsdelivr.net/npm/ayajs@1.0.1/build/aya.js"></script>
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ayajs@1.0.1/build/style.css">-->
+    <script src="aya_stub.js"></script>
+    <!--<script type="application/javascript"  src="https://cdn.jsdelivr.net/npm/ayajs@1.0.1/build/aya.js"></script>-->
     <title>graphical resource test</title>
 </head>
 <body>
@@ -15,15 +15,13 @@
     <div id="qunit-fixture"></div>
     <div class="scripts">
         <script>
-            var aya = new aya.Init();
+            var aya = new Aya();
             console.log(aya);
         </script>
         <script src="https://cdn.jsdelivr.net/npm/qunit@latest"></script>
 
-        <script src="../src/path.js"></script>
+        <script src="../src/entities/variable.js"></script>
 
-        <script src="resource.test.js"></script>
-        <script src="path.test.js"></script>
         <script src="variable.test.js"></script>
 </body>
 </html>
