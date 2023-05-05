@@ -5,9 +5,9 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="initial-scale=1.0">
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ayajs@1.0.1/build/style.css">
-   <!-- <script type="application/javascript"  src="aya.js"></script> -->
-   <script type="application/javascript"  src="https://cdn.jsdelivr.net/npm/ayajs@1.0.1/build/aya.js"></script>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ayajs@2.0.5/build/style.css">
+   <script type="application/javascript"  src="aya.js"></script>
+   <!-- <script type="application/javascript"  src="https://cdn.jsdelivr.net/npm/ayajs@2.0.5/build/aya.js"></script> -->
    <title>graphical resources</title>
 </head>
 
@@ -16,13 +16,13 @@
    <script>
       console.log(aya);
       var aya = new aya.Init();
-
-      // remove grid from the svg
-      aya.box.form.children.map(({child}) =>{
-         aya.svg.removeChild(child.c_svg);
-      });
-
+      aya.config.text.textanchor = "start";
+      aya.config.text.startoffset = "0%";
       document.body.append(aya.svg);
+   </script>
+   <script src="src/entities/resource.js"></script>
+   <script>
+      var res = new Resource({name: "cheapest", x: 350, y: 300, r: 50});
    </script>
 </body>
 </html>

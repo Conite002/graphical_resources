@@ -53,6 +53,10 @@ class Aya{
 		    setAttribute: (tag, value) =>{
 			Obj.shape[tag] = value;
 		    },
+			getAttribute: (tag)=>{
+				return Obj.shape[tag];
+			},
+
 		    addEventListener: ()=>{},
 		    removeEventListener: () => {}
 		},
@@ -63,12 +67,18 @@ class Aya{
 		    setAttribute: (tag, value) =>{
 			Obj.shape[tag] = value;
 		    },
+			getBBox: ()=>{
+				return {
+					width: 10
+				}
+			},
 		    addEventListener: (e, callback) => {
 			var ev = {};
 			ev[e] = callback;
 			Obj.events.push(ev);
 		    },
 		},
+		type: type,
 		x: props ? props.x : null,
 		y: props ? props.y : null,
 		r: props ? props.r : null,
@@ -213,13 +223,30 @@ class Aya{
 	return Obj;
     }
 
-    Text(x, y, text, size = 0){
+    Text(x, y, text, size = 0, dest_x, dest_y){
 	var Obj = {
 	    type: 'text',
 	    size: size ? size : null,
 	    x: x != undefined ? x : null,
 	    y: y != undefined ? y : null,
+		dest_x: dest_x != undefined ? dest_x : null,
+	    dest_y: dest_y != undefined ? dest_y : null,
 	    text: text ? text : null,
+		c_svg: {
+		    setAttribute: (tag, value) =>{
+			Obj.shape[tag] = value;
+		    },
+			getBBox: ()=>{
+				return {
+					width: 10
+				}
+			},
+		    addEventListener: (e, callback) => {
+			var ev = {};
+			ev[e] = callback;
+			Obj.events.push(ev);
+		    },
+		},
 	    draw(){},
 	    redraw(){}
 	};
