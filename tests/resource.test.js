@@ -54,7 +54,20 @@ QUnit.test("Set y", (assert)=>{
 });
 
 
+/**
+ * Test: Display a portion of the text when its width is longer that the diameter. 
+ * If diamete - textwidth < 0 :
+ */
 
+QUnit.test("Resource name width is center", (assert) =>{
+    var res = new Resource({name: "cheapest", x: 20, y: 20, r: 40});
+    var text = res._shape.shape.children[0].child;
+    var diameter =res._shape.shape.r *2;
+    var textwidth = this._shape.shape.children[0].child.c_svg.getBBox().width;
+    text.x = res._shape.shape.x + (diameter -textwidth)/2; 
+    text_dest_x = text.x + textwidth; 
+    assert.equal((res._shape.shape.x + (diameter -textwidth)/2), text.x);
+});
 // QUnit.test("L'arc se transforme en point lors d'un mousedown", function(assert) {
 //     var ressource = new Ressource(radius=10, color="black", name="Restaurant");
 //     var type = ["GET", "POST", "PUT", "DELETE"];
