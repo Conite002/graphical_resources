@@ -3,71 +3,54 @@ QUnit.module('Resource');
 
 QUnit.test("Default representation of a resource ", function(assert) {
     var res = new Resource();
-    assert.equal(res._shape.shape.type, "circle", "set shape");
-    assert.equal(res._shape.shape.r, 10, "set r");
-    assert.equal(res._shape.shape.x, 0, "set x");
-    assert.equal(res._shape.shape.y, 0, "set y");
-    assert.equal(res._shape.shape.fill, "#D9D7F1", "set color");
+    assert.equal(res.shape.type, "circle", "set shape");
+    assert.equal(res.shape.r, 10, "set r");
+    assert.equal(res.shape.x, 0, "set x");
+    assert.equal(res.shape.y, 0, "set y");
+    assert.equal(res.shape.fill, "#D9D7F1", "set color");
     assert.equal(res.name, "dummy", "set name");
 });
 
 QUnit.test("resource creation with parameters  ", assert => {
     var res = new Resource({name : "cheapest", x : 10, y : 10, r : 20});
-    assert.equal(res._shape.shape.type, "circle", "set shape");
-    assert.equal(res._shape.shape.r, 20, "set r");
-    assert.equal(res._shape.shape.x, 10, "set x");
-    assert.equal(res._shape.shape.y, 10, "set y");
+    assert.equal(res.shape.type, "circle", "set shape");
+    assert.equal(res.shape.r, 20, "set r");
+    assert.equal(res.shape.x, 10, "set x");
+    assert.equal(res.shape.y, 10, "set y");
     assert.equal(res.name, "cheapest", "set name");
 });
 
-QUnit.test(" Throws an exception when x attribute isn't a number.", assert => {
+QUnit.test("Throws an exception when x attribute isn't a number.", assert => {
     assert.throws(()=>{
         new Resource({x: "10"});
     }, 'x attribute should be a number');
 });
 
-QUnit.test(" Throws an exception when y attribute isn't a number.", assert => {
+QUnit.test("Throws an exception when y attribute isn't a number.", assert => {
     assert.throws(()=>{
         new Resource({x: 10, y: "10"});
     }, 'y attribute should be a number');
 });
 
-QUnit.test(" Throws an exception when r attribute isn't a number.", assert => {
+QUnit.test("Throws an exception when r attribute isn't a number.", assert => {
     assert.throws(()=>{
         new Resource({x: 10, y: 10, r: "10"});
     }, 'r attribute should be a number');
 });
 
-QUnit.test("Draw the name of the resource", assert => {
+QUnit.test("Displaying the name of the resource", assert => {
     var res = new Resource({name: "cheapest", x: 20, y: 20, r: 20});
-    assert.equal(res._shape.shape.children[0].child.type, "text", "name is a text child");
-    assert.equal(res._shape.shape.children[0].child.text, res.name, "set text value");
+    assert.equal(res.shape.children[0].child.type, "text", "name is a text child");
+    assert.equal(res.shape.children[0].child.text, res.name, "set text value");
+    assert.equal(res.shape.children[0].child.y, res.shape.y + 5);
+    /* res.shape.children[0].child.x is setted by using getBBox method of  dom element */
 });
-
-
-//Todo
-    // set text_x by using getBBox of c_svg
-QUnit.test("Set y", (assert)=>{
-    var res = new Resource({name: "cheapest", x: 20, y: 20, r: 20});
-    var text = res._shape.shape.children[0].child;
-    assert.equal(text.y, res._shape.shape.y);
-});
-
 
 /**
  * Test: Display a portion of the text when its width is longer that the diameter. 
- * If diamete - textwidth < 0 :
  */
 
-QUnit.test("Resource name width is center", (assert) =>{
-    var res = new Resource({name: "cheapest", x: 20, y: 20, r: 40});
-    var text = res._shape.shape.children[0].child;
-    var diameter =res._shape.shape.r *2;
-    var textwidth = this._shape.shape.children[0].child.c_svg.getBBox().width;
-    text.x = res._shape.shape.x + (diameter -textwidth)/2; 
-    text_dest_x = text.x + textwidth; 
-    assert.equal((res._shape.shape.x + (diameter -textwidth)/2), text.x);
-});
+
 // QUnit.test("L'arc se transforme en point lors d'un mousedown", function(assert) {
 //     var ressource = new Ressource(radius=10, color="black", name="Restaurant");
 //     var type = ["GET", "POST", "PUT", "DELETE"];

@@ -1,7 +1,6 @@
-import { abstractFactory } from "../abstraction/abstractFactory";
 
-class Factory extends abstractFactory{
-    constructor(){
+class Factory{
+    getComponent(type, props){
 
     }
 }

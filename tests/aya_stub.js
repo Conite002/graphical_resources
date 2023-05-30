@@ -25,7 +25,9 @@ var aya = {
                 type: "point",
                 events: {},
                 c_svg: {
-                   setAttribute(){}
+                   setAttribute(key, value){
+                     Obj[key] = value;
+                   }
                 },
                 events: {},
                 addEvent(event, callback){
@@ -39,10 +41,66 @@ var aya = {
                    Obj.addEvent("mousedown", ()=>{});
                    Obj.addEvent("mouseover", ()=>{});
                    Obj.addEvent("mouseleave", ()=>{});
-                }
+                },
+                setStyles: (o) => {
+                  Object.keys(o).map((key ,index) => {
+                     Obj.c_svg.setAttribute(key, o[key]);
+                  });
+               }
              }
              return Obj;
           },
+          circle: (x, y, r, isdrawing, issave, uuid = undefined)=>{
+            var id = Math.random().toString(36).substring(2, 15) +
+                     Math.random().toString(36).substring(2, 15);
+            var Obj = {
+               uuid: uuid || id,
+               x: x != undefined ? x : null,
+               y: y != undefined ? y : null,
+               r: r != undefined ? r : null,
+               ref: uuid ? uuid : null,
+               svg: "",
+               type: "circle",
+               events: {},
+               children: [],
+               c_svg: {
+                  setAttribute(key, value){
+                     Obj[key] = value;
+                   }
+               },
+               events: {},
+               addEvent(event, callback){
+                  Obj.events[event] = callback;
+               },
+               deleteEvent(event){
+                  delete Obj.events[event];
+               },
+               removeFromDOM(){},
+               draw(){
+                  Obj.addEvent("mousedown", ()=>{});
+                  Obj.addEvent("mouseover", ()=>{});
+                  Obj.addEvent("mouseleave", ()=>{});
+               },
+               setStyles: (o) => {
+                  Object.keys(o).map((key ,index) => {
+                     Obj.c_svg.setAttribute(key, o[key]);
+                  });
+               },
+               addChild: (child, translate, rotate, drawing) => {
+                  if (translate){
+                     child.offsetX = translate.x;
+                     child.offsetY = translate.y;
+                  }
+                  if (rotate){
+                     child.centerX = rotate.centerX;
+                     child.centerY = rotate.centerY;
+                     child.angle = rotate.angle;
+                  }
+                  Obj.children.push({child});
+               }
+            }
+            return Obj;
+         },
           line: (x, y, dest_x, dest_y, isdrawing, issave, uuid = undefined)=>{
  
              var id =  Math.random().toString(36).substring(2, 15) +
@@ -57,12 +115,19 @@ var aya = {
                 svg: "",
                 type: "line",
                 c_svg: {
-                   setAttribute(){}
+                  setAttribute(key, value){
+                     Obj[key] = value;
+                   }
                 },
                 draw(){
                 },
                 redraw(){
-                }
+                },
+                setStyles: (o) => {
+                  Object.keys(o).map((key ,index) => {
+                     Obj.c_svg.setAttribute(key, o[key]);
+                  });
+               }
              }
              return Obj;
           },
@@ -230,7 +295,7 @@ var aya = {
                 },
                 setStyles: (o) => {
                    Object.keys(o).map((key ,index) => {
-                      Obj.svg.setAttribute(key, o[key]);
+                      Obj.c_svg.setAttribute(key, o[key]);
                    });
                 }
              };
@@ -403,7 +468,7 @@ var aya = {
                 },
                 setStyles: (o) => {
                    Object.keys(o).map((key ,index) => {
-                      Obj.svg.setAttribute(key, o[key]);
+                      Obj.c_svg.setAttribute(key, o[key]);
                    });
                 }
              };
@@ -433,7 +498,12 @@ var aya = {
                    Obj.events.push(ev);
                 },
                 },
-                draw(){}
+                draw(){},
+                setStyles: (o) => {
+                  Object.keys(o).map((key ,index) => {
+                     Obj.c_svg.setAttribute(key, o[key]);
+                  });
+               }
              };
              return Obj;
           },
@@ -444,7 +514,16 @@ var aya = {
                 uuid: uuid || id,
                 type: 'text',
                 svg: "",
-                c_svg: "",
+                c_svg: {
+                  setAttribute(key, value){
+                     Obj[key] = value;
+                   },
+                   getBBox(){
+                     return {
+                        width: 0
+                     }
+                   }
+                },
                 size: size ? size : null,
                 x: x != undefined ? x : null,
                 y: y != undefined ? y : null,
@@ -452,7 +531,12 @@ var aya = {
                 dest_y: dest_y != undefined ? dest_y : null,
                 text: text ? text : null,
                 draw(){},
-                redraw(){}
+                redraw(){},
+                setStyles: (o) => {
+                  Object.keys(o).map((key ,index) => {
+                     Obj.c_svg.setAttribute(key, o[key]);
+                  });
+               }
              };	
              return Obj;
           },
@@ -463,13 +547,22 @@ var aya = {
                 uuid: uuid || id,
                 points: points,
                 svg: "",
-                c_svg: "",
+                c_svg: {
+                  setAttribute(key, value){
+                     Obj[key] = value;
+                   }
+                },
                 type: 'polyline',
                 removeFromDOM(){
                    Obj.c_svg = "";
                 },
                 draw(){},
                 redraw(){},
+                setStyles: (o) => {
+                  Object.keys(o).map((key ,index) => {
+                     Obj.c_svg.setAttribute(key, o[key]);
+                  });
+               }
              };
              return Obj;
           },

@@ -1,6 +1,17 @@
+function getTextWidth(texte){
+  var tbox = document.createElement("span");
+  tbox.style.visibility = "hidden";
+  tbox.style.position = "absolute";
+  tbox.style.whiteSpace = "nowrap";
+  tbox.textContent = texte;
+  document.body.appendChild(tbox);
+  var width = tbox.offsetWidth;
+  document.body.removeChild(tbox);
+  return width;
+}
+
 class Resource {
   constructor(props = { name: "dummy", x: 0, y: 0, r: 10 }) {
-    this.name = props.name;
     if (
       typeof props.x != "number" ||
       typeof props.y != "number" ||
@@ -8,52 +19,36 @@ class Resource {
     )
       throw new Error(" Type error.");
 
-    this._shape = aya.Component("circle", {
-      x: props.x,
-      y: props.y,
-      r: props.r,
-    });
-    this._shape.shape.setStyles({
+    this.name = props.name;
+
+    this.shape = aya.circle(props.x, props.y, props.r);
+    this.shape.setStyles({
       fill: "#D9D7F1",
     });
-    var text = aya.Text(this._shape.shape.x, this._shape.shape.y+5, this.name, 10000);
-    this._shape.addChild(text, null, null, true);
+    var text = aya.text(this.shape.x, this.shape.y+5, this.name, 0, 0, 0, false);
+    this.shape.addChild(text, null, null, true);
     
-    var bbox = this._shape.shape.children[0].child.c_svg.getBBox();
-    var textWidth = bbox.width;
+    var textWidth = this.shape.children[0].child.c_svg.getBBox().width;
 
-    if (textWidth > this._shape.shape.r * 2) {
-      var estimatedChars = Math.floor(this.name.length * this._shape.shape.r * 2 / textWidth);
+    if (textWidth > this.shape.r * 2) {
+
+      var estimatedChars = Math.floor(this.name.length * this.shape.r * 2 / textWidth);
       var maxChars = Math.max(0, estimatedChars-1);
       text.c_svg.textContent = this.name.substring(0, maxChars) + "...";
       text.setText(this.name);
-      // textWidth = this._shape.shape.children[0].child.c_svg.getBBox().width;
-      textWidth = this.getTextWidth(this.name);
-      while (textWidth > 0 && textWidth > this._shape.shape.r * 2) {
+
+      textWidth = getTextWidth(this.name);
+
+      while (textWidth > 0 && textWidth > this._shape.shape.r * 2){
         text.c_svg.textContent = text.c_svg.textContent.slice(0, -1);
         textWidth = this.getTextWidth(text.c_svg.textContent);
-        console.log(text.c_svg.textContent) 
-        console.log(this.name);
       }
       text.text = text.c_svg.textContent;
     }
     
-    var delta_x = (this._shape.shape.r * 2 - textWidth) / 2;
-    text.x = this._shape.shape.x - this._shape.shape.r + delta_x;
+    var deltaX = (this.shape.r * 2 - textWidth) / 2;
+    text.x = this.shape.x - this.shape.r + deltaX;
 
     text.redraw();
-  }
-
-  getTextWidth(texte){
-    var dummyText = document.createElement("span");
-    dummyText.style.visibility = "hidden";
-    dummyText.style.position = "absolute";
-    dummyText.style.whiteSpace = "nowrap";
-    dummyText.textContent = texte;
-    document.body.appendChild(dummyText);
-    var width = dummyText.offsetWidth;
-    console.log(" width ", width);
-    document.body.removeChild(dummyText);
-    return width;
   }
 }

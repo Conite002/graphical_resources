@@ -1,4 +1,3 @@
-//import { abstractComponent } from "../../abstraction/abstractComponent";
 var actions = [
     {name: "deletion", path: "src/images/"},
     {name: "path", path: "src/images/"},

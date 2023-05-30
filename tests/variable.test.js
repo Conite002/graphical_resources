@@ -3,7 +3,6 @@ QUnit.module('Variable');
 /****visual representation of a variable****/
 
 QUnit.test("default creation of a variable", assert =>{
-	/*style= template , name= dummy*/
 	var v = new Variable();
 	assert.equal(v.name, "dummy", "the name must be dummy");
 	assert.equal(v.style, "template", "the style must be template");
