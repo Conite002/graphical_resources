@@ -51,4 +51,28 @@ class Resource {
 
     text.redraw();
   }
+
+  createArcs() {
+    const arcRadius = this.shape.r + 20; 
+
+    const angles = [0, 90, 180, 270]; 
+
+    for (let angle of angles) {
+      const radians = (angle * Math.PI) / 180;
+
+      const arcX = this.shape.x + arcRadius * Math.cos(radians);
+      const arcY = this.shape.y + arcRadius * Math.sin(radians);
+
+      const arc = aya.Component("arc", {
+        x: arcX,
+        y: arcY,
+        x0: this.shape.x,
+        y0: this.shape.y,
+        angle: 70,
+        ratio: 3 / 4,
+      });
+
+      
+    }
+  }
 }
