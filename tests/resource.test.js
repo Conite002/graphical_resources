@@ -50,6 +50,16 @@ QUnit.test("Displaying the name of the resource", assert => {
  * Test: Display a portion of the text when its width is longer that the diameter. 
  */
 
+ QUnit.test('methods is array', assert => {
+    var res = new Resource({name: "ozepo", x: 350, y: 330, r: 34, methods: ["GET", "PUT", "POST"], startAngle: 50});
+    assert.ok(Array.isArray(res.methods), 'methods is array');
+  });
+  
+  QUnit.test('startAngle is a number', assert => {
+    var res = new Resource({name: "ozepo", x: 350, y: 330, r: 34, methods: ["GET", "PUT", "POST"], startAngle: 50});
+    assert.ok(Number.isInteger(res.startAngle), 'startAngle is a number');
+  });
+
 
 // QUnit.test("L'arc se transforme en point lors d'un mousedown", function(assert) {
 //     var ressource = new Ressource(radius=10, color="black", name="Restaurant");
