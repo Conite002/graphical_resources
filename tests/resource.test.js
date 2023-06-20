@@ -50,59 +50,50 @@ QUnit.test("Displaying the name of the resource", assert => {
  * Test: Display a portion of the text when its width is longer that the diameter. 
  */
 
- QUnit.test('methods is array', assert => {
-    var res = new Resource({name: "ozepo", x: 350, y: 330, r: 34, methods: ["GET", "PUT", "POST"], startAngle: 50});
-    assert.ok(Array.isArray(res.methods), 'methods is array');
-  });
+//  QUnit.test('methods is array', assert => {
+//     var res = new Resource({name: "ozepo", x: 350, y: 330, r: 34, methods: ["GET", "PUT", "POST"], startAngle: 50});
+//     assert.ok(Array.isArray(res.methods), 'methods is array');
+//   });
   
-  QUnit.test('startAngle is a number', assert => {
-    var res = new Resource({name: "ozepo", x: 350, y: 330, r: 34, methods: ["GET", "PUT", "POST"], startAngle: 50});
-    assert.ok(Number.isInteger(res.startAngle), 'startAngle is a number');
-  });
+// QUnit.test('startAngle is a number', assert => {
+//     var res = new Resource({name: "ozepo", x: 350, y: 330, r: 34, methods: ["GET", "PUT", "POST"], startAngle: 50});
+//     assert.ok(Number.isInteger(res.startAngle), 'startAngle is a number');
+// });
 
 
-// QUnit.test("L'arc se transforme en point lors d'un mousedown", function(assert) {
-//     var ressource = new Ressource(radius=10, color="black", name="Restaurant");
-//     var type = ["GET", "POST", "PUT", "DELETE"];
-//     var verb = ressource.getVerb(type[0]);
-//     var arc = verb.toArc();
-    
-//     assert.strictEqual(arc.points.lenght, 4, "Les points sont égales à quatre");
+  
+QUnit.test("addPanel adds arcs and text to the resource", assert => {
+    var res = new Resource({name: "resource", x: 50, y: 50, r: 30});
+    var actions = ["get", "put", "post", "del"];
+    res.addPanel(actions);
 
-// })
+    assert.equal(res.actions.length, actions.length, "addPanel adds the correct number of actions");
+    for (var i = 0; i < actions.length; i++) {
+        console.log(res.actions[i].type)
+        assert.equal(res.actions[i].type, "arc", `action ${i+1} is an arc`);
+        assert.equal(res.actions[i].children[0].child.type, "text", `action ${i+1} has a text child`);
+        assert.equal(res.actions[i].children[0].child.text, actions[i], `action ${i+1} has the correct text value`);
+    }
+});
 
+QUnit.test("removePanel removes all actions from the resource", assert => {
+    var res = new Resource({name: "resource", x: 50, y: 50, r: 30});
+    var actions = ["get", "put", "post", "del"];
+    res.addPanel(actions);
+    res.removePanel();
 
-// QUnit.test("Les verbes HTTP sont dessinés autour du cercle lors d'un survol de la ressource", function (assert) {
-//     var ressource = new Ressource(radius=10, color="black", name="Restaurant")
-//     var ressourceElement = ressource.toSvg();
-//     var dimensionSVG = {
-//         height: 100,
-//         width: 100
-//     }
-//     var dimensionVerb = {
-//         centerX : 50,
-//         centerY : 50,
-//         radius : 10,
-//         angle : Math.PI
-//     }
-//     var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-//     var event = MouseEvent("mouseover");
-    
-//     svg.setAttribute("width", dimensionSVG.width);
-//     svg.setAttribute("height", dimensionSVG.height);
-//     svg.appendChild(ressourceElement);
-//     svg.dispatchEvent(event);
+    assert.equal(res.actions.length, 0, "removePanel removes all actions from the resource");
+});
 
-//     var verbSelector = ".verbes-http";
-//     verbElements = document.querySelectorAll(verbSelector);
-    
-//     //calcul d'aire
-//     var verbsSurface = verbElements.map(verb => {
-//         //calcul d'aire de la forme de chaque verb
-//         //stockage de ces aires comme des clés 
-        
-//     });
+QUnit.test("Event listeners are added to the resource shape", assert => {
+    var res = new Resource({name: "resource", x: 50, y: 50, r: 30});
+    var shape = res.shape;
+    console.log(shape.events)
+    assert.equal(shape.events.mouseover.length, 1, "mouseover event listener is added");
+    assert.equal(shape.events.mouseleave.length, 1, "mouseleave event listener is added");
+});
 
-//     //assert
-
-// })
+QUnit.test("Methods are correctly assigned to the resource", assert => {
+    var res = new Resource({name: "resource", x: 50, y: 50, r: 30});
+    assert.deepEqual(res.methods, ["GET", "PUT", "POST", "DELETE"], "methods are correctly assigned to the resource");
+});

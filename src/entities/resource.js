@@ -41,6 +41,7 @@ class Resource {
     this.shape.addEvent("mouseover", ()=>{
       Events.onmouseover(this, methods);
     });
+
     this.shape.addEvent("mouseleave", ()=>{
       Events.onmouseleave(this);
     });
@@ -66,7 +67,6 @@ class Resource {
           Events.onmouseover(this, methods);
         });
       }      
-
     } catch (error) {
       console.log(error);
     }
