@@ -46,33 +46,42 @@ test("Resource name - add a text element to the resource", assert=>{
     assert.equal(res.shape.children.length, 1, "one item");
     assert.equal(res.shape.children[0].child.type, "text", "type checking");
     assert.equal(res.shape.children[0].child.text, res.name, "set text value");
-    assert.equal(res.shape.children[0].child.y, 0, "set y value");
 });
 
-test("createHiddenElementWithText - create hidden span text with the given text ", assert => {
-    var texte = "Mon texte";
-    var textspan = createHiddenElementWithText(texte);
-    assert.equal(textspan.tagName.toLowerCase(), "span", "Created element is a <span> element");
-    assert.equal(textspan.textContent, texte, "textspan contains texte");
-    assert.equal(textspan.style.visibility, "hidden", )
+test("getText() - create hidden span text with the given text", assert => {
+    var text = "resource";
+    var textspan = getText(text);
+    assert.equal(textspan.tagName.toLowerCase(), "span", "span created");
+    assert.equal(textspan.textContent, text, "textspan contains text");
+    assert.equal(textspan.style.visibility, "hidden", "textspan has hidden visibility");
+    assert.equal(textspan.style.position, "absolute", "textspan has absolute position");
+    assert.equal(textspan.style.whiteSpace, "nowrap", "textspan has nowrap whiteSpace");
+    assert.ok(document.body.contains(textspan), "textspan is added from the document body");
 });
 
-// test("Resource name - set text position element to the resource", assert=>{
-//     var res = new Resource({ name: "res"});
-//     var t_width = getTextWidth(res.name);
-//     assert.equal(
-//         res.shape.children[0].child.x,
-//         res.shape.x - res.shape.r + (res.shape.r * 2 - t_width)/2,
-//         "set x"
-//     );
-//     assert.equal(res.shape.y, res.shape.children[0].child.y, "set y");
-// });
+test("getText() - get correct testspan width", assert =>{
+    var text = "resource";
+    var textspan = getText(text);
+    assert.equal(textspan.width, textspan.offsetWidth, "width and offsetWidth are equals");
+});
 
-// test("Resource name - reduce text element to the resource when it's too long", assert=>{
-//     var res = new Resource({ name: "resioioezoziez556566599897854"});
-//     assert.ok(res.name.includes(res.shape.children[0].child.text), 'text value is in resource name');
-// });
+test("Resource name - set text position element to the resource", assert=>{
+    var res = new Resource({ name: "res"});
+    var t_width = getText(res.name).width;
+    assert.equal(
+        res.shape.children[0].child.x,
+        res.shape.x - res.shape.r + (res.shape.r * 2 - t_width)/4,
+        "set x"
+    );
+    assert.equal(res.shape.children[0].child.y, res.shape.y + DELTA_Y, "set y");
+});
 
+test("Resource name - reduce text element to the resource when it's too long", assert=>{
+    var res = new Resource({ name: "resioioezoziez556566599897854"});
+    var textWithoutEllipsis = res.shape.children[0].child.text.slice(0, -3);
+    assert.ok(res.shape.r*2 > getText(textWithoutEllipsis).width, "diameter is greater than textspan width");
+    assert.ok(res.name.includes(textWithoutEllipsis), 'text value is in resource name');
+});
 
 // test("resource creation with parameters  ", assert => {
 //     var res = new Resource({name : "cheapest", x : 10, y : 10, r : 20});
