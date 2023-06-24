@@ -22,7 +22,6 @@ test("display path name", assert=>{
 });
 
 
-
 /**
  * Tests related to mouseover event on the path' shape
  */
