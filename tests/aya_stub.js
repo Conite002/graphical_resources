@@ -97,7 +97,10 @@ var aya = {
                      child.angle = rotate.angle;
                   }
                   Obj.children.push({child});
-               }
+               },
+               makeHiddenCpoints(){},
+               makeHiddenVertex(){},
+               removeBoxFromDOM(){},
             }
             return Obj;
          },
@@ -520,8 +523,8 @@ var aya = {
                    },
                    getBBox(){
                      return {
-                        width: 0
-                     }
+                        width: 100
+                     };
                    }
                 },
                 size: size ? size : null,
@@ -579,7 +582,64 @@ var aya = {
                 }
              };
              return Obj;
-          }
+          },
+          arc: (x0, y0, x, y, angle, ratio, isdrawing, isave, uuid)=>{
+            var id = Math.random().toString(36).substring(2, 15) +
+            Math.random().toString(36).substring(2, 15);
+            var Obj = {
+               uuid: uuid || id,
+               type: 'arc',
+               svg: "",
+               events: {},
+               children: [],
+               c_svg: {
+               setAttribute(key, value){
+                  Obj[key] = value;
+                  },
+               },
+               addEvent(event, callback){
+                  Obj.events[event] = callback;
+               },
+               deleteEvent(event){
+                  delete Obj.events[event];
+               },
+               setStyles: (o) => {
+                  Object.keys(o).map((key ,index) => {
+                     Obj.c_svg.setAttribute(key, o[key]);
+                  });
+               },
+               addChild: (child, translate, rotate, drawing) => {
+                  if (translate){
+                     child.offsetX = translate.x;
+                     child.offsetY = translate.y;
+                  }
+                  if (rotate){
+                     child.centerX = rotate.centerX;
+                     child.centerY = rotate.centerY;
+                     child.angle = rotate.angle;
+                  }
+                  Obj.children.push({child});
+               },
+               removeFromDOM(){},
+               x0: x0 != undefined ? x0 : null,
+               y0: y0 != undefined ? y0 : null,
+               x: x != undefined ? x : null,
+               y: y != undefined ? y : null,
+               angle: angle != undefined ? angle : null,
+               offsetX0: 0,
+               offsetY0: 0,
+               dest_x: dest_x != undefined ? dest_x : null,
+               dest_y: dest_y != undefined ? dest_y: null,
+               radius: 20,
+               ratio: ratio != undefined ? ratio: null,
+               draw(){},
+               shift(dx, dy){},
+               redraw(){},
+               calculateAngle(x, y, dest_x, dest_y){},
+               resize(pos, dx, dy){}
+            }
+            return Obj;
+         }
        }
     }
  }
