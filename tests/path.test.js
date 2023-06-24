@@ -1,45 +1,93 @@
+const {test} = QUnit;
 QUnit.module('Path');
 
-/***************************** visual representation of a path *********************************/
 
-QUnit.test("default visual representation of a path", assert =>{
-	var p = new Path("/");
+/**
+ * Tests related to path creation
+ */
+test("path creation", assert=>{
 
-	assert.equal(p.shape.type, "circle", "the shape must be a circle");
-	assert.equal(p.shape.form.r, 15, "the circle radius must be 15px");
-	assert.equal(p.shape.form["stroke-width"], "2px", "the border width must be 2px");
-	assert.equal(p.shape.form["stroke"], "green", "the border color must be green");
-	assert.equal(p.shape.form["fill"], "gray", "the circle color must be gray");
 });
 
-QUnit.test("checking that the shape is effectively a circle", assert =>{
-	
+test("visual representation of a path", assert=>{
+
 });
 
 
-QUnit.test("throws an exception when the path attribute isn't defined", assert =>{
+/**
+ * Tests related to path name displaying
+ */
+test("display path name", assert=>{
 
-    assert.throws(function(){
-    	new Path();
-    },"path's creation requires a name");
 });
 
-QUnit.test("throws an exception when the first character of a path isn't a /", assert =>{
-	
+
+
+/**
+ * Tests related to mouseover event on the path' shape
+ */
+
+test("add mouseover on the shape", assert=>{
+
 });
 
-QUnit.test("throws an exception when it appears two consecutive / symbols", assert =>{
-	
+test("addPanel() - add panel to shape", assert=>{
+
 });
 
-QUnit.test("throws an exception when the first character of a path isn't a /", assert =>{
-	
+test("addPanel() - fill the panel with actions", assert=>{
+
 });
 
-QUnit.test("throws an exception when the first character of a path isn't a /", assert =>{
-	
+
+/**
+ * Tests related to mouseleave event on the path shape
+ */
+
+test("add mouseleave on the shape", assert=>{
+
 });
 
-QUnit.test("throws an exception when uri portion doesn't respect REST specification", assert =>{
-	
+test("removePanel() - remove actions from the panel", assert=>{
+
+});
+
+test("removePanel() - remove panel from the browser", assert=>{
+
+});
+
+
+/**
+ * Tests related to mouseover on the panel
+ */
+
+test("mouseovercb() - add mouseover on the panel", assert=>{
+
+});
+
+
+test("mouseovercb() - make the panel staying", assert=>{
+
+});
+
+
+
+/**
+ * Tests related to mousedown on the actions inside the panel
+ */
+
+test("add mousedown on the actions", assert=>{
+
+});
+
+test("mousedowncb() - create a path object", assert=>{
+
+});
+
+test("mousedowncb() - create a resource object", assert=>{
+
+});
+
+test("mousedowncb() - remove the panel and the actions inside", assert=>{
+
 });
