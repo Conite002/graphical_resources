@@ -188,4 +188,3 @@ test("addPanel() - set rotate center for text element", assert => {
 
 //  assert.equal(res.actions.length, 0, "reno actions;
 //;
-x
