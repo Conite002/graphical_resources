@@ -1,6 +1,11 @@
 const { test } = QUnit;
 QUnit.module('Resource');
 
+
+/**
+ * Tests related to exceptions handling
+ */
+
 test("Throws an exception when name attribute isn't a string.", assert =>{
     assert.throws(()=>{
         new Resource({ name: null });
@@ -12,6 +17,11 @@ test("Throws an exception when name attribute is an empty string.", assert =>{
         new Resource({ name: "" });
     }, "name should be a no empty.");
 });
+
+
+/**
+ * Tests related to resource creation
+ */
 
 test('Resource object checking after its creation', assert=>{
     var res = new Resource({name: "res"});
@@ -35,6 +45,10 @@ test("Resource position on x_axis and y_axis.", function(assert){
 });
 
 
+/**
+ * Tests related to the resource name
+ * 
+ */
 test("setName() - set name ", assert =>{
     var res = new Resource({ name:"res"});
     res.setName("res2");
@@ -83,99 +97,95 @@ test("Resource name - reduce text element to the resource when it's too long", a
     assert.ok(res.name.includes(textWithoutEllipsis), 'text value is in resource name');
 });
 
-// test("resource creation with parameters  ", assert => {
-//     var res = new Resource({name : "cheapest", x : 10, y : 10, r : 20});
-//     assert.equal(res.shape.type, "circle", "set shape");
-//     assert.equal(res.shape.r, 20, "set r");
-//     assert.equal(res.shape.x, 10, "set x");
-//     assert.equal(res.shape.y, 10, "set y");
-//     assert.equal(res.name, "cheapest", "set name");
-// });
-
-// test("Throws an exception when x attribute isn't a number.", assert => {
-//     assert.throws(()=>{
-//         new Resource({x: "10"});
-//     }, 'x attribute should be a number');
-// });
-
-// test("Throws an exception when y attribute isn't a number.", assert => {
-//     assert.throws(()=>{
-//         new Resource({x: 10, y: "10"});
-//     }, 'y attribute should be a number');
-// });
-
-// test("Throws an exception when r attribute isn't a number.", assert => {
-//     assert.throws(()=>{
-//         new Resource({x: 10, y: 10, r: "10"});
-//     }, 'r attribute should be a number');
-// });
-
-// test("Displaying the name of the resource", assert => {
-//     var res = new Resource({name: "cheapest", x: 20, y: 20, r: 20});
-//     assert.equal(res.shape.children[0].child.type, "text", "name is a text child");
-//     assert.equal(res.shape.children[0].child.text, res.name, "set text value");
-//     assert.equal(res.shape.children[0].child.y, res.shape.y + 5);
-// });
-
-/**
- * Test: Display a portion of the text when its width is longer that the diameter. 
- */
-
-//  test('methods is array', assert => {
-//     var res = new Resource({name: "ozepo", x: 350, y: 330, r: 34, methods: ["GET", "PUT", "POST"], startAngle: 50});
-//     assert.ok(Array.isArray(res.methods), 'methods is array');
-//   });
-  
-// test('startAngle is a number', assert => {
-//     var res = new Resource({name: "ozepo", x: 350, y: 330, r: 34, methods: ["GET", "PUT", "POST"], startAngle: 50});
-//     assert.ok(Number.isInteger(res.startAngle), 'startAngle is a number');
-// });
-
 /**
  * Test: Add mouseover and mouseleave on resource
  */
 
-//  test("Add mouseover on the resource", assert => {
-//     var res = new Resource({name: "resource", x: 50, y: 50, r: 30});
-//     res.shape.addEvent("mouseover", 2);
-//     assert.equal(res.shape.events["mouseover"], 2, "set mouseover");
-// });
+test("Add mouseover on the resource", assert => {
+    var res = new Resource({name: "resource"});
+    assert.equal(typeof res.shape.events["mouseover"], "function", "set mouseover");
+});
 
-// test("Add mouseleave on the resource", assert => {
-//     var res = new Resource({name: "resource", x: 50, y: 50, r: 30});
-//     res.shape.addEvent("mouseleave", 2);
-//     assert.equal(res.shape.events["mouseleave"], 2, "set mouseleave");
-// });
-
-// QUnit.test("addPanel adds arcs and text to the resource", assert => {
-//     var res = new Resource({name: "resource", x: 50, y: 50, r: 30});
-//     var actions = ["get", "put", "post", "del"];
-//     res.addPanel(actions);
-
-//     assert.equal(res.actions.length, actions.length, "addPanel adds the correct number of actions");
-//     for (var i = 0; i < actions.length; i++) {
-//         console.log(res.actions[i].type)
-//         assert.equal(res.actions[i].type, "arc", `action ${i+1} is an arc`);
-//         assert.equal(res.actions[i].children[0].child.type, "text", `action ${i+1} has a text child`);
-//         assert.equal(res.actions[i].children[0].child.text, actions[i], `action ${i+1} has the correct text value`);
-//     }
-// });
-
-// QUnit.test("removePanel removes all actions from the resource", assert => {
-//     var res = new Resource({name: "resource", x: 50, y: 50, r: 30});
-//     var actions = ["get", "put", "post", "del"];
-//     res.addPanel(actions);
-//     res.removePanel();
-
-//     assert.equal(res.actions.length, 0, "removePanel removes all actions from the resource");
-// });
+test("Add mouseleave on the resource", assert => {
+    var res = new Resource({name: "resource"});
+    assert.equal(typeof res.shape.events["mouseleave"], "function", "set mouseleave");
+});
 
 
 
+/**
+ * Test related to mouseovercb (addPanel())
+ */
 
-// QUnit.test("Methods are correctly assigned to the resource", assert => {
-//     var res = new Resource({name: "resource", x: 50, y: 50, r: 30});
-//     var actions = ["GET", "PUT", "POST", "DELETE"];
-//     res.addPanel(actions);
-//     assert.deepEqual(res.actions.length, methods.length, "methods are correctly assigned to the resource");
-// });
+test("addPanel() - add arcs", assert => {
+    var res = new Resource({name: "resource"});
+    var actions = ["get", "put", "post", "del"];
+    res.addPanel(actions);
+
+    assert.equal(res.actions.length, actions.length, "set actions");
+
+    for (var i = 0; i < actions.length; i++) {
+        assert.equal(res.actions[i].type, "arc", "check type");
+        assert.equal(res.actions[i].angle, ANGLE, "set angle");
+        assert.equal(res.actions[i].ratio, RATIO, "set ratio");
+
+        assert.equal(res.actions[i].x0, res.shape.x, "set x0");
+        assert.equal(res.actions[i].y0, res.shape.y, "set y0");
+        if (i != 0){
+            assert.equal(res.actions[i].x, res.actions[i-1].dest_x, "set x");
+            assert.equal(res.actions[i].y, res.actions[i-1].dest_y, "set y");
+        }
+        else{
+            assert.equal(res.actions[i].x, res.shape.x, "set x");
+            assert.equal(res.actions[i].y, res.shape.y, "set y");
+        }
+    }
+});
+
+
+
+test("addPanel() - add text as arcs' children", assert=>{
+    var res = new Resource({name: "resource"});
+    var actions = ["get", "put", "post", "del"];
+    res.addPanel(actions);
+
+    actions.map((a, index)=>{
+        arc = res.actions[index];
+        var child = res.actions[index].children[0];
+        assert.equal(res.actions[index].children.length, 1, "one child");
+        assert.equal(child.type, 'text', "child is a text");
+        assert.equal(child.x, arc.x, "set x");
+        assert.equal(child.y, arc.y - DELTA_Y, "set y");
+        assert.equal(child.name, actions[index], "set text value");
+    });
+});
+
+
+
+test("addPanel() - set rotate center for text element", assert => {
+    var res = new Resource({name: "resource"});
+    var actions = ["get", "put", "post", "del"];
+    res.addPanel(actions);
+
+    actions.map((a, index)=>{
+        arc = res.actions[index];
+        var child = res.actions[index].children[0];
+        assert.equal(child.centerX, arc.x, "set centerX");
+        assert.equal(child.centerY, arc.y, "set centerY");
+        assert.equal(child.angle, getAngle(ANGLE, index), "set angle");
+    });
+});
+
+
+/**
+ * Tests related to mouseleavecb (removePanel())
+ */
+//nit.test("removePananel()e- moves all actions from the resource", assert => {
+//  var res = new Resource({name: "resource", ;
+//  var actions = ["get", "put", "post", "del"];
+//  res.addPanel(actions);
+//  res.removePanel();
+
+//  assert.equal(res.actions.length, 0, "reno actions;
+//;
+x
