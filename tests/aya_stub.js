@@ -602,6 +602,9 @@ var aya = {
                setAttribute(key, value){
                   Obj[key] = value;
                   },
+               getAttribute(key){
+                  return Obj[key];
+                  },
                },
                addEvent(event, callback){
                   Obj.events[event] = callback;
