@@ -32,51 +32,33 @@ class Resource {
     text.redraw();
 
     this.shape.addEvent("mouseover", () => {
-      Events.onmouseover(this,methods);
+      this.addPanel();
     });
     this.shape.addEvent("mouseleave", () => {
-      Events.onmouseleave(this);
+      this.removePanel();
     });
-
-    
   }
 
   setName(value){
     this.name = value;
   }
-  addPanel(actions) {
+  addPanel() {
       var x = this.shape.x;
       var y = this.shape.y + this.shape.r + 20;
-      for (var i = 0; i < actions.length; i++) {
+      for (var i = 0; i < methods.length; i++) {
         var arc = aya.arc(this.shape.x, this.shape.y, x, y, ANGLE, RATIO, false);
         
         this.shape.addChild(arc, null, null, true);
-        // this.shape.c_svg.appendChild(arc.c_svg);
-        var text = aya.text(arc.x, arc.y - DELTA_Y, actions[i], 0, 0, 0, false);
+        var text = aya.text(arc.x, arc.y - DELTA_Y, methods[i], 0, 0, 0, false);
         arc.addChild(text, null, { x: arc.x, y: arc.y, angle: getAngle(ANGLE,i) }, true);
         text.c_svg.setAttribute("transform", "rotate(" + `${text.angle}` + "," +` ${text.centerX}` + "," + `${text.centerY}` + ")");
         text.textPath.setAttribute("startOffset", "5%");
-        // this.shape.addChild(text, null, null, false);
-        this.actions.push(arc);
+        methods.push(arc);
         x = arc.dest_x;
         y = arc.dest_y;
-        
-        arc.addEvent("mouseover", ()=>{
-          Events.onmouseover(this, methods);
-        });
-        console.log(this.shape);
       }      
-
   }
 
   removePanel(){
-    this.actions.map((arc, index) =>{
-      arc.children.map((text) => {
-        
-        text.removeFromDOM();
-      });
-      arc.removeFromDOM();
-    });
-    this.actions = [];
   }
 }

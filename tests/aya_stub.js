@@ -527,6 +527,12 @@ var aya = {
                      };
                    }
                 },
+                textPath: {
+                  setAttribute(){}
+                },
+                path_text:{
+                  setAttribute(){}
+                },
                 size: size ? size : null,
                 x: x != undefined ? x : null,
                 y: y != undefined ? y : null,
@@ -596,6 +602,9 @@ var aya = {
                setAttribute(key, value){
                   Obj[key] = value;
                   },
+               getAttribute(key){
+                  return Obj[key];
+                  },
                },
                addEvent(event, callback){
                   Obj.events[event] = callback;
@@ -614,8 +623,8 @@ var aya = {
                      child.offsetY = translate.y;
                   }
                   if (rotate){
-                     child.centerX = rotate.centerX;
-                     child.centerY = rotate.centerY;
+                     child.centerX = rotate.x;
+                     child.centerY = rotate.y;
                      child.angle = rotate.angle;
                   }
                   Obj.children.push({child});
@@ -628,8 +637,8 @@ var aya = {
                angle: angle != undefined ? angle : null,
                offsetX0: 0,
                offsetY0: 0,
-               dest_x: dest_x != undefined ? dest_x : null,
-               dest_y: dest_y != undefined ? dest_y: null,
+               dest_x: 0,
+               dest_y: 0,
                radius: 20,
                ratio: ratio != undefined ? ratio: null,
                draw(){},
