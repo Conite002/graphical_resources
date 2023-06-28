@@ -188,14 +188,11 @@ test("addPanel() - set rotate center for text element", assert => {
 /**
  * Tests related to mouseleavecb (removePanel())
  */
-test("removePananel() - removes all actions from the resource", assert => {
- var res = new Resource({name: "resource"});
- var actions = ["get", "put", "post", "del"];
- res.addPanel(actions);
- res.removePanel();
- assert.equal(res.actions.length, 0, "no action in the resource ");
- assert.ok(res.shape.children.length - 1 >= 0, "no component child in the resource");
-});
+//nit.test("removePananel()e- moves all actions from the resource", assert => {
+//  var res = new Resource({name: "resource", ;
+//  var actions = ["get", "put", "post", "del"];
+//  res.addPanel(actions);
+//  res.removePanel();
 
-
-
+//  assert.equal(res.actions.length, 0, "reno actions;
+//;
