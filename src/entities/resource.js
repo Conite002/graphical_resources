@@ -37,8 +37,6 @@ class Resource {
     this.shape.addEvent("mouseleave", () => {
       Events.onmouseleave(this);
     });
-
-    
   }
 
   setName(value){
@@ -64,7 +62,6 @@ class Resource {
         arc.addEvent("mouseover", ()=>{
           Events.onmouseover(this, methods);
         });
-        console.log(this.shape);
       }      
 
   }
