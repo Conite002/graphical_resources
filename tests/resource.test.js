@@ -97,6 +97,9 @@ test("Resource name - reduce text element to the resource when it's too long", a
     assert.ok(res.name.includes(textWithoutEllipsis), 'text value is in resource name');
 });
 
+
+
+
 /**
  * Test: Add mouseover and mouseleave on resource
  */
@@ -113,98 +116,19 @@ test("Add mouseleave on the resource", assert => {
 
 
 /**
- * Test related to mouseovercb (addPanel())
+ * Tests related to events callbacks on the resource
  */
 
-test("addPanel() - add arcs", assert => {
+test('mouseovercb() - set resource state to component', assert=>{
     var res = new Resource({name: "resource"});
-    var actions = ["get", "put", "post", "del"];
-    res.addPanel();
 
-    assert.equal(res.actions.length, actions.length, "set actions");
-
-    for (var i = 0; i < actions.length; i++) {
-        assert.equal(res.actions[i].type, "arc", "check type");
-        assert.equal(res.actions[i].angle, ANGLE, "set angle");
-        assert.equal(res.actions[i].ratio, RATIO, "set ratio");
-
-        assert.equal(res.actions[i].x0, res.shape.x, "set x0");
-        assert.equal(res.actions[i].y0, res.shape.y, "set y0");
-        if (i != 0){
-            /**
-             * We are going to do just the control of quality. 
-             */
-            // assert.equal(res.actions[i].x, res.actions[i-1].dest_x, "set x");
-            // assert.equal(res.actions[i].y, res.actions[i-1].dest_y, "set y");
-        }
-        else{
-            // assert.equal(res.actions[i].x, res.shape.x, "set x");
-            // assert.equal(res.actions[i].y, res.shape.y, "set y");
-            /**
-             * We are going to do just the control of quality.
-             */
-        }
-    }
+    assert.equal(res.state, undefined, 'state is undefined');
+    resmouseovercb(res);
+    assert.equal(res.state, 'component', 'state changed to component');
 });
 
-
-
-test("addPanel() - add text as arcs' children", assert=>{
+test('mouseleave() - set resource state to null', assert=>{
     var res = new Resource({name: "resource"});
-    var actions = ["get", "put", "post", "del"];
-    res.addPanel();
-    actions.map((a, index)=>{
-        arc = res.actions[index];
-        var child = res.actions[index].children[0].child; 
-
-        assert.equal(res.actions[index].children.length, 1, "one child");
-        assert.equal(child.type, 'text', "child is a text");
-        assert.equal(child.x, arc.x, "set x");
-        assert.equal(child.y, arc.y - DELTA_Y, "set y");
-        assert.equal(child.text, actions[index], "set text value");
-    });
+    resmouseleavecb(res);
+    assert.equal(res.state, null, 'state = null');
 });
-
-
-
-test("addPanel() - set rotate center for text element", assert => {
-    var res = new Resource({name: "resource"});
-    var actions = ["get", "put", "post", "del"];
-    res.addPanel();
-
-    actions.map((a, index)=>{
-        arc = res.actions[index];
-        var child = res.actions[index].children[0].child;
-        console.log(child);
-
-        assert.equal(child.centerX, arc.x, "set centerX");
-        assert.equal(child.centerY, arc.y, "set centerY");
-        assert.equal(child.angle, getAngle(ANGLE, index), "set angle");
-    });
-});
-
-
-// test("removePanel() - hide actions from the resource", assert =>{
-//     var res = new Resource({name: "resource"});
-//     var actions = ["get", "put", "post", "del"];
-//     res.addPanel();
-//     assert.equal(res.actions.length, 4, "resource have no actions");
-//     res.actions.map((a, index)=>{
-//         assert.equal(a.c_svg.getAttribute('visibility'), 'visible', 'hide action');
-//         assert.equal(a.children[0].child.c_svg.getAttribute('visibility'), 'visible', 'hide text action');
-//     });
-
-//     res.removePanel();
-//     res.actions.map((a, index)=>{
-//         assert.equal(a.c_svg.getAttribute['visibility'], 'hidden', 'hide action');
-//         assert.equal(a.children[0].child.c_svg.getAttribute('visibility'), 'hidden', 'hide text action');
-//     });
-// });
-
-
-/**
- * Tests related to adding mouseover on the arcs
- */
-// test("add mouseover on the arc", assert=>{
-
-// });

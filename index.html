@@ -6,8 +6,8 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="initial-scale=1.0">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ayajs@2.0.7/build/style.css">
-   <!-- <script type="application/javascript"  src="aya.js"></script> -->
-   <script type="application/javascript"  src="https://cdn.jsdelivr.net/npm/ayajs@2.0.7/build/aya.js"></script>
+   <script type="application/javascript"  src="aya.js"></script>
+   <!-- <script type="application/javascript"  src="https://cdn.jsdelivr.net/npm/ayajs@2.0.7/build/aya.js"></script> -->
    <title>graphical resources</title>
 </head>
 
@@ -18,9 +18,12 @@
       console.log(aya);
       aya.config.text.textanchor = "start";
       aya.config.text.startoffset = "0%";
+      aya.grid(aya.svg);
       document.body.append(aya.svg);
    </script>
+   <script src="src/panel.js"></script>
    <script src="constantes/index.js"></script>
+   <script src="src/actions/resactions.js"></script>
    <script src="src/events.js"></script>
    <script src="utils.js"></script>
    <script src="src/entities/resource.js"></script>

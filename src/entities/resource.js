@@ -1,5 +1,3 @@
-var methods = ["get", "put", "post", "del"];
-
 class Resource {
   constructor(props) {
     if( props && (typeof props.name != "string" || props.name == "")){
@@ -14,14 +12,19 @@ class Resource {
     this.shape.makeHiddenCpoints();
     this.shape.makeHiddenVertex();
     this.shape.removeBoxFromDOM();
-    this.actions = [];
+
+    this.actions = resourceactions;
+
     this.shape.setStyles({
       fill: SH_FILL,
     });
 
+		this.panelPos = -1; // to be tested
+
     var text = aya.text(0, this.shape.y + DELTA_Y, this.name, 0, 0, 0, false);
     this.shape.addChild(text, null, null, true);
     var t_width = getText(this.name).width;
+
     if (t_width > this.shape.r * 2) {
       text.text = reduceText(t_width, this.shape.r * 2, this.name);
       text.c_svg.textContent = text.text;
@@ -31,34 +34,25 @@ class Resource {
     text.x = this.shape.x - this.shape.r + deltaX/2;
     text.redraw();
 
-    this.shape.addEvent("mouseover", () => {
-      this.addPanel();
-    });
-    this.shape.addEvent("mouseleave", () => {
-      this.removePanel();
+    this.shape.addEvent("mouseover", (e) => {
+          resmouseovercb(this, e);
+      });
+    this.shape.addEvent("mouseleave", (e) => {
+      resmouseleavecb(this, e);
     });
   }
 
   setName(value){
     this.name = value;
   }
-  addPanel() {
-      var x = this.shape.x;
-      var y = this.shape.y + this.shape.r + 20;
-      for (var i = 0; i < methods.length; i++) {
-        var arc = aya.arc(this.shape.x, this.shape.y, x, y, ANGLE, RATIO, false);
-        
-        this.shape.addChild(arc, null, null, true);
-        var text = aya.text(arc.x, arc.y - DELTA_Y, methods[i], 0, 0, 0, false);
-        arc.addChild(text, null, { x: arc.x, y: arc.y, angle: getAngle(ANGLE,i) }, true);
-        text.c_svg.setAttribute("transform", "rotate(" + `${text.angle}` + "," +` ${text.centerX}` + "," + `${text.centerY}` + ")");
-        text.textPath.setAttribute("startOffset", "5%");
-        methods.push(arc);
-        x = arc.dest_x;
-        y = arc.dest_y;
-      }      
-  }
-
-  removePanel(){
-  }
 }
+
+var resmouseovercb = (target, e)=>{
+  Events.onmouseover(target, resourceactions.list, 
+    target.shape.x + target.shape.r,
+    target.shape.y - target.shape.r);
+};
+
+var resmouseleavecb = (target, e)=>{
+  Events.onmouseleave(target);
+};

@@ -59,16 +59,24 @@ var aya = {
                y: y != undefined ? y : null,
                r: r != undefined ? r : null,
                ref: uuid ? uuid : null,
-               svg: "",
+               svg: {
+                  addEventListener(event, callback){
+                     Obj.svg_events[event] = callback;
+                  },
+                  removeEventListener(event, callback){
+                     delete Obj.svg_events[event];
+                  }
+               },
                type: "circle",
                events: {},
                children: [],
                c_svg: {
                   setAttribute(key, value){
                      Obj[key] = value;
-                   }
+                  }
                },
                events: {},
+               svg_events: {},
                addEvent(event, callback){
                   Obj.events[event] = callback;
                },
@@ -254,6 +262,12 @@ var aya = {
                       uuid: null
                    },
                 ],
+                addEvent(event, callback){
+                  Obj.events[event] = callback;
+               },
+               deleteEvent(event){
+                  delete Obj.events[event];
+               },
                 draw(){
                    Obj.shape.c_points.map((pt) => {
                       pt.draw();
@@ -482,27 +496,36 @@ var aya = {
                       Math.random().toString(36).substring(2, 15);
  
              var Obj = {
-                uuid: uuid || id,
-                x: x != undefined ? x : null,
-                y: y != undefined ? y : null,
-                width: width ? width : null,
-                height: height ? height : null,
-                path: path ? path : null,
-                name: name ? name : null,
-                type: "image",
-                events: [],
-                c_svg: {
-                setAttribute: (tag, value) =>{
-                   Obj[tag] = value;
-                },
-                addEventListener: (e, callback) => {
-                   var ev = {};
-                   ev[e] = callback;
-                   Obj.events.push(ev);
-                },
-                },
-                draw(){},
-                setStyles: (o) => {
+               uuid: uuid || id,
+               x: x != undefined ? x : null,
+               y: y != undefined ? y : null,
+               offsetX: 0,
+               offsetY: 0,
+               width: width ? width : null,
+               height: height ? height : null,
+               path: path ? path : null,
+               name: name ? name : null,
+               type: "image",
+               events: {},
+               c_svg: {
+               setAttribute: (tag, value) =>{
+                  Obj[tag] = value;
+               },
+               addEventListener: (e, callback) => {
+                  var ev = {};
+                  ev[e] = callback;
+                  Obj.events.push(ev);
+               },
+               },
+               addEvent(event, callback){
+                  Obj.events[event] = callback;
+               },
+               deleteEvent(event){
+                  delete Obj.events[event];
+               },
+               draw(){},
+               removeFromDOM(){},
+               setStyles: (o) => {
                   Object.keys(o).map((key ,index) => {
                      Obj.c_svg.setAttribute(key, o[key]);
                   });
