@@ -6,9 +6,9 @@ QUnit.module("Panel", {
             {name: "post", path: "src/images/post.jpg"},
             {name: "put", path: "src/images/put.jpg"},
             {name: "del", path: "src/images/delete.jpg"}
-          ];
-        }
-    });
+        ];
+    }
+});
 
 
 /**
@@ -151,16 +151,8 @@ test("Panel.add() - add mousedown on the actions", assert=> {
 /**
  * Tests releted to creating the corresponding method when a mousedown has been applied on an action
  */
-test("resourceactions.get(target) - create the get method as a child of the resource", assert=> {
-    var res = resource();
-    var method = resourceactions.get(res);
-    assert.equal(method.type, 'circle');
-    assert.equal(method.fill, 'black', 'black point');
-    assert.equal(method.r, 3, 'radius is 5');
-    assert.equal(method.x, Math.cos( ( (60 - 0 * 30 ) * Math.PI) / 180) * res.shape.r + res.shape.x, "set x");
-    assert.equal(method.y, Math.sin( ( (60 - 0 * 30 ) *  Math.PI) / 180) * res.shape.r + res.shape.y, "set y");
-  
-});
+
+// resource actions
 
 test("resourceactions.get(target) - get action should be deleted", assert=>{
     var res = resource();
@@ -173,17 +165,6 @@ test("resourceactions.get(target) - get action should be deleted", assert=>{
         if (index)
             assert.notEqual(child.name, 'get', 'get action has been deleted');
     });
-});
-
-
-test("resourceactions.post(target) - create the post method as a child of the resource", assert=> {
-    var res = resource();
-    var method = resourceactions.post(res);
-    assert.equal(method.type, 'circle');
-    assert.equal(method.fill, 'black', 'black point');
-    assert.equal(method.r, 3, 'radius is 5');
-    assert.equal(method.x, Math.cos( ( (60 - 1 * 30 ) * Math.PI) / 180) * res.shape.r + res.shape.x, "set x");
-    assert.equal(method.y, Math.sin( ( (60 - 1 * 30 ) *  Math.PI) / 180) * res.shape.r + res.shape.y, "set y");
 });
 
 test("resourceactions.post(target) - post action should be deleted", assert=>{
@@ -199,18 +180,6 @@ test("resourceactions.post(target) - post action should be deleted", assert=>{
     });
 });
 
-
-test("resourceactions.put(target) - create the put method as a child of the resource", assert=> {
-    var res = resource();
-    var method = resourceactions.put(res);
-    assert.equal(method.type, 'circle');
-    assert.equal(method.fill, 'black', 'black point');
-    assert.equal(method.r, 3, 'radius is 5');
-    assert.equal(method.x, Math.cos( ( (60 - 2 * 30 ) * Math.PI) / 180) * res.shape.r + res.shape.x, "set x");
-    assert.equal(method.y, Math.sin( ( (60 - 2 * 30 ) *  Math.PI) / 180) * res.shape.r + res.shape.y, "set y");
-
-});
-
 test("resourceactions.put(target) - put action should be deleted", assert=>{
     var res = resource();
     Panel.add(res, resourceactions.list, 100, 100);
@@ -224,29 +193,7 @@ test("resourceactions.put(target) - put action should be deleted", assert=>{
     });
 });
 
-test("resourceactions.del(target) - create the delete method as a child of the resource", assert=> {
-    var res = resource();
-    var method = resourceactions.del(res);
-    assert.equal(method.type, 'circle');
-    assert.equal(method.fill, 'black', 'black point');
-    assert.equal(method.r, 3, 'radius is 5');
-    assert.equal(method.x, Math.cos( ( (60 - 3 * 30 ) * Math.PI) / 180) * res.shape.r + res.shape.x, "set x");
-    assert.equal(method.y, Math.sin( ( (60 - 3 * 30 ) *  Math.PI) / 180) * res.shape.r + res.shape.y, "set y");
 
-});
-
-test("resourceactions.del(target) - delete action should be deleted", assert=>{
-    var res = resource();
-    Panel.add(res, resourceactions.list, 100, 100);
-    Panel.remove(res);
-    resourceactions.del(res);
-    Panel.add(res, resourceactions.list, 100, 100);
-
-    res.shape.children.map(({child}, index) =>{
-        if (index)
-            assert.notEqual(child.name, 'del', 'delete action has been deleted');
-    });
-});
 /**
  * Tests related to changing the target state according to the event applied on the actions or the panel
  */

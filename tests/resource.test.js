@@ -132,3 +132,49 @@ test('mouseleave() - set resource state to null', assert=>{
     resmouseleavecb(res);
     assert.equal(res.state, null, 'state = null');
 });
+
+
+/**
+ * Tests releted to creating the corresponding method when a mousedown has been applied on an action
+ */
+test("resourceactions.get(target) - create the get method as a child of the resource", assert=> {
+    var res = Resource();
+    var method = resourceactions.get(res);
+    assert.equal(method.type, 'circle');
+    assert.equal(method.fill, 'black', 'black point');
+    assert.equal(method.r, 3, 'radius is 5');
+    assert.equal(method.x, Math.cos( ( (60 - 0 * 30 ) * Math.PI) / 180) * res.shape.r + res.shape.x, "set x");
+    assert.equal(method.y, Math.sin( ( (60 - 0 * 30 ) *  Math.PI) / 180) * res.shape.r + res.shape.y, "set y");
+});
+
+
+test("resourceactions.post(target) - create the post method as a child of the resource", assert=> {
+    var res = Resource();
+    var method = resourceactions.post(res);
+    assert.equal(method.type, 'circle');
+    assert.equal(method.fill, 'black', 'black point');
+    assert.equal(method.r, 3, 'radius is 5');
+    assert.equal(method.x, Math.cos( ( (60 - 1 * 30 ) * Math.PI) / 180) * res.shape.r + res.shape.x, "set x");
+    assert.equal(method.y, Math.sin( ( (60 - 1 * 30 ) *  Math.PI) / 180) * res.shape.r + res.shape.y, "set y");
+});
+
+
+test("resourceactions.put(target) - create the put method as a child of the resource", assert=> {
+    var res = Resource();
+    var method = resourceactions.put(res);
+    assert.equal(method.type, 'circle');
+    assert.equal(method.fill, 'black', 'black point');
+    assert.equal(method.r, 3, 'radius is 5');
+    assert.equal(method.x, Math.cos( ( (60 - 2 * 30 ) * Math.PI) / 180) * res.shape.r + res.shape.x, "set x");
+    assert.equal(method.y, Math.sin( ( (60 - 2 * 30 ) *  Math.PI) / 180) * res.shape.r + res.shape.y, "set y");
+});
+
+test("resourceactions.del(target) - create the delete method as a child of the resource", assert=> {
+    var res = Resource();
+    var method = resourceactions.del(res);
+    assert.equal(method.type, 'circle');
+    assert.equal(method.fill, 'black', 'black point');
+    assert.equal(method.r, 3, 'radius is 5');
+    assert.equal(method.x, Math.cos( ( (60 - 3 * 30 ) * Math.PI) / 180) * res.shape.r + res.shape.x, "set x");
+    assert.equal(method.y, Math.sin( ( (60 - 3 * 30 ) *  Math.PI) / 180) * res.shape.r + res.shape.y, "set y");
+});

@@ -1,21 +1,32 @@
-var resource = ()=>  {
-    return {
-        shape: aya.circle(0,0,RADIUS),
-        panelPos: -1,
-        actions: resourceactions
+class Resource{
+    constructor(){
+        this.shape = aya.circle(0,0,RADIUS);
+        this.panelPos = -1;
+        this.action = resourceactions;
+        this.type = 'resource';
     }
-};
+}
 
-var path = ()=> {
-    return {
-        shape: aya.circle(0,0,RADIUS),
-        panelPos: -1
+// class Path{
+//     constructor(props = {path: '/'}){
+//         this.shape = aya.circle(0,0, P_RADIUS);
+//         this.panelPos = -1;
+//         this.action = pathactions;
+//         this.type = 'path';
+//     }
+// }
+
+class Variable{
+    constructor(){
+        this.shape = aya.lozenge(0,0,L_WIDTH, L_HEIGHT);
+        this.panelPos = -1;
+        this.action = varactions;
+        this.type = 'variable';
     }
-};
+}
 
-var variable = ()=> {
-    return {
-        shape: aya.lozenge(0,0,RADIUS),
-        panelPos: -1
+var Panel = {
+    add: (target, action, e)=>{
+
     }
 };

@@ -446,6 +446,15 @@ var aya = {
                       vt.draw();
                    });
                 },
+                addEvent(event, callback){
+                  Obj.events[event] = callback;
+               },
+               deleteEvent(event){
+                  delete Obj.events[event];
+               },
+                makeHiddenCpoints: ()=>{},
+                makeHiddenVertex: ()=>{},
+                removeBoxFromDOM: ()=>{},
                 redraw: ()=>{
                 },
                 svg: {
@@ -564,6 +573,9 @@ var aya = {
                 text: text ? text : null,
                 draw(){},
                 redraw(){},
+                makeHiddenCpoints(){},
+                makeHiddenVertex(){},
+                removeBoxFromDOM(){},
                 setStyles: (o) => {
                   Object.keys(o).map((key ,index) => {
                      Obj.c_svg.setAttribute(key, o[key]);
