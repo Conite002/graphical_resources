@@ -1,9 +1,8 @@
 class Resource {
   constructor(props) {
-    try{
-      if( props && (typeof props.name != "string" || props.name == "")){
+      if(props && (typeof props.name != "string" || props.name == ""))
         throw new Error(" name should be a string");
-      }
+      
       this.name = props.name;
       this.shape = aya.circle(
         props.x ? props.x : 0,
@@ -42,10 +41,6 @@ class Resource {
       this.shape.addEvent("mouseleave", (e) => {
         resmouseleavecb(this, e);
       });
-    }
-    catch(e){
-      console.log(e);
-    }
   }
 
   setName(value){

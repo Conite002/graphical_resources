@@ -32,7 +32,7 @@ test("Panel.path2name()  - return '' when the name is not found", assert=>{
  * Tests related to adding the panel and the actions inside
  */
 test("Panel.add() - add the empty panel", assert=>{
-    var res = resource();
+    var res = new Resource();
     Panel.add(res, resourceactions.list, 0, 0);
 
     assert.equal(res.shape.children[0].child.type, "rectangle", "panel has a rectangle as support");
@@ -49,7 +49,7 @@ test("Panel.add() - add the empty panel", assert=>{
 
 
 test("Panel.add() - panel must cover the component", assert=>{
-    var res = resource();
+    var res = new Resource();
     Panel.add(res, resourceactions.list, 0, 0);
 
     assert.ok(res.shape.children.length, "the shape has a child");
@@ -60,7 +60,7 @@ test("Panel.add() - panel must cover the component", assert=>{
 
 
 test("Panel.add() - add actions to the panel", assert=>{
-    var res = resource();
+    var res = new Resource();
     Panel.add(res, resourceactions.list, 0, 0);
 
     assert.equal(res.shape.children.length, resourceactions.list.length + 1, "resource children");
@@ -77,7 +77,7 @@ test("Panel.add() - add actions to the panel", assert=>{
 });
 
 test("Panel.add(target, actions, posx, posy) - set y space and x space between actions", assert=>{
-    var res = resource();
+    var res = new Resource();
     Panel.add(res, resourceactions.list, 100, 100);
     // actions are displayed on three columns
     assert.equal(res.shape.children[1].child.x, 100, "set x to posX");
@@ -100,19 +100,19 @@ test("Panel.add(target, actions, posx, posy) - set y space and x space between a
  * Tests related to adding event on the panel
  */
 test("Panel.add() - add mouseover on the panel", assert=> {
-    var res = resource();
+    var res = new Resource();
     Panel.add(res, resourceactions.list, 100, 100);
     assert.equal(typeof res.shape.children[0].child.events['mouseover'], 'function', "mouseover defined");
 });
 
 test("Panel.add() - add mouseleave on the panel", assert=> {
-    var res = resource();
+    var res = new Resource();
     Panel.add(res, resourceactions.list, 100, 100);
     assert.equal(typeof res.shape.children[0].child.events['mouseleave'], 'function', "mouseleave defined");
 });
 
 test("Panel.add() - add mouseover on the svg", assert=> {
-    var res = resource();
+    var res = new Resource();
     Panel.add(res, resourceactions.list, 100, 100);
     assert.equal(typeof res.shape.svg_events['mouseover'], 'function', "mouseover defined");
 });
@@ -122,7 +122,7 @@ test("Panel.add() - add mouseover on the svg", assert=> {
  * Tests related to adding events on the actions inside the panel
  */
 test("Panel.add() - add mouseover on the actions", assert=> {
-    var res = resource();
+    var res = new Resource();
     Panel.add(res, resourceactions.list, 100, 100);
     res.shape.children.map(({child}, index) =>{
         if (index)
@@ -131,7 +131,7 @@ test("Panel.add() - add mouseover on the actions", assert=> {
 });
 
 test("Panel.add() - add mouseleave on the actions", assert=> {
-    var res = resource();
+    var res = new Resource();
     Panel.add(res, resourceactions.list, 100, 100);
     res.shape.children.map(({child}, index) =>{
         if (index)
@@ -140,7 +140,7 @@ test("Panel.add() - add mouseleave on the actions", assert=> {
 });
 
 test("Panel.add() - add mousedown on the actions", assert=> {
-    var res = resource();
+    var res = new Resource();
     Panel.add(res, resourceactions.list, 100, 100);
     res.shape.children.map(({child}, index) =>{
         if (index)
@@ -155,7 +155,7 @@ test("Panel.add() - add mousedown on the actions", assert=> {
 // resource actions
 
 test("resourceactions.get(target) - get action should be deleted", assert=>{
-    var res = resource();
+    var res = new Resource();
     Panel.add(res, resourceactions.list, 100, 100);
     Panel.remove(res);
     resourceactions.get(res);
@@ -168,7 +168,7 @@ test("resourceactions.get(target) - get action should be deleted", assert=>{
 });
 
 test("resourceactions.post(target) - post action should be deleted", assert=>{
-    var res = resource();
+    var res = new Resource();
     Panel.add(res, resourceactions.list, 100, 100);
     Panel.remove(res);
     resourceactions.post(res);
@@ -181,7 +181,7 @@ test("resourceactions.post(target) - post action should be deleted", assert=>{
 });
 
 test("resourceactions.put(target) - put action should be deleted", assert=>{
-    var res = resource();
+    var res = new Resource();
     Panel.add(res, resourceactions.list, 100, 100);
     Panel.remove(res);
     resourceactions.put(res);
@@ -199,14 +199,14 @@ test("resourceactions.put(target) - put action should be deleted", assert=>{
  */
 
 test("mouseovercb() - change target state", assert=>{
-    var res = resource();
+    var res = new Resource();
     Panel.add(res, resourceactions.list, 100, 100);
     panelmouseovercb(res);
     assert.equal(res.state, 'panel', "set state to panel");
 });
 
 test("mouseleavecb() - change target state", assert=>{
-    var res = resource();
+    var res = new Resource();
     Panel.add(res, resourceactions.list, 100, 100);
     panelmouseovercb(res);
     assert.equal(res.state, 'panel', "set state to panel");
@@ -215,7 +215,7 @@ test("mouseleavecb() - change target state", assert=>{
 });
 
 test("mousedowncb() - remove the panel and execute the action", assert=>{
-    var res = resource();
+    var res = new Resource();
     Panel.add(res, resourceactions.list, 100, 100);
     assert.equal(res.state, null, "state panel is null");
     assert.true(res.panelPos >= 0, 'panel has been added');
@@ -233,7 +233,7 @@ test("mousedowncb() - remove the panel and execute the action", assert=>{
 });
 
 test("svgmouseovercb() - remove the panel", assert=>{
-    var res = resource();
+    var res = new Resource();
     Panel.add(res, resourceactions.list, 100, 100);
     panelmouseovercb(res);
     assert.equal(res.state, 'panel', "set state to panel");
@@ -252,14 +252,14 @@ test("svgmouseovercb() - remove the panel", assert=>{
  */
 
 test("Panel.remove(target) - return null when panelPos < 0", assert=>{
-    var res = resource();
+    var res = new Resource();
     assert.true(res.panelPos < 0, 'panelPos < 0');
     var isRemoved = Panel.remove(res);
     assert.equal(isRemoved, null, 'return null');
 });
 
 test("Panel.remove(target) - delete the panel and actions from component's children and the DOM", assert=>{
-    var res = resource();
+    var res = new Resource();
     Panel.add(res, resourceactions.list, 100, 100);
     assert.true(res.panelPos >= 0, 'panel is added');
     Panel.remove(res);

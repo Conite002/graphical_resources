@@ -138,7 +138,7 @@ test('mouseleave() - set resource state to null', assert=>{
  * Tests releted to creating the corresponding method when a mousedown has been applied on an action
  */
 test("resourceactions.get(target) - create the get method as a child of the resource", assert=> {
-    var res = Resource();
+    var res = new Resource({ name: "res"});
     var method = resourceactions.get(res);
     assert.equal(method.type, 'circle');
     assert.equal(method.fill, 'black', 'black point');
@@ -149,7 +149,7 @@ test("resourceactions.get(target) - create the get method as a child of the reso
 
 
 test("resourceactions.post(target) - create the post method as a child of the resource", assert=> {
-    var res = Resource();
+    var res = new Resource({ name: "res"});
     var method = resourceactions.post(res);
     assert.equal(method.type, 'circle');
     assert.equal(method.fill, 'black', 'black point');
@@ -160,7 +160,7 @@ test("resourceactions.post(target) - create the post method as a child of the re
 
 
 test("resourceactions.put(target) - create the put method as a child of the resource", assert=> {
-    var res = Resource();
+    var res = new Resource({ name: "res"});
     var method = resourceactions.put(res);
     assert.equal(method.type, 'circle');
     assert.equal(method.fill, 'black', 'black point');
@@ -170,7 +170,7 @@ test("resourceactions.put(target) - create the put method as a child of the reso
 });
 
 test("resourceactions.del(target) - create the delete method as a child of the resource", assert=> {
-    var res = Resource();
+    var res = new Resource({ name: "res"});
     var method = resourceactions.del(res);
     assert.equal(method.type, 'circle');
     assert.equal(method.fill, 'black', 'black point');
