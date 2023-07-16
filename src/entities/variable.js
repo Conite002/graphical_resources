@@ -3,6 +3,10 @@ class Variable{
         let text;
         let x = 0;
         let y = 0;
+        if (props.x && props.y){
+            x = props.x;
+            y = props.y;
+        }
         if (props && props.name)
             this.name = props.name;
 
@@ -10,20 +14,17 @@ class Variable{
             throw new Error('style is not correct');
         this.style = props.style;
 
-        if (props.x)
-            x = props.x;
-        if (props.y)
-            y = props.y;
-
         if (this.style == 'template')
-            text = '{'+ this.name + '}';
+            text = '{'+ this.style + '}';
         else if (this.style == 'plain')
-            text = '{'+ this.name + '}';
+            text = '{'+ this.style + '}';
         else 
-            text = '{'+ this.name + '?}';
+            text = '{'+ this.style + '?}';
 
+        this.type = 'variable';
         this.panelPos = -1;
         this.actions = varactions;
+        this.children = [];
         this.shape = aya.lozenge(x, y, L_WIDTH, L_HEIGHT);
 
         this.shape.makeHiddenCpoints();

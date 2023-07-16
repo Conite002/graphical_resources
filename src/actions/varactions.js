@@ -3,36 +3,67 @@ var varactions = {
     {name: "path", path: "src/images/path.jpg"},
     {name: "variable", path: "src/images/variable.jpg"},
     {name: "resource", path: "src/images/res.jpg"},
-    // {name: "remove", path: "src/images/remove.jpg"}
+    {name: "remove", path: "src/images/trash.png"}
   ],
   path: (target)=>{
-    var path = new Path();
+    var obj = Layout.getClosestPosition(Math.floor(target.shape.x/Layout.cellW), Math.floor(target.shape.y/Layout.cellH));
+        
+    Layout.mark(obj.x, obj.y);
 
-    aya.link(target.shape.uuid, path.shape.uuid, {end_dest: "triangle"});
+    var path = new Path({
+        path: '/',
+        x: obj.x * Layout.cellW + Layout.cellW/2,
+        y: obj.y * Layout.cellH + Layout.cellH/2 
+    });
+    var lk = aya.link(target.shape.uuid, path.shape.uuid, {end_dest: "triangle"});
+    Register.add(lk.uuid, lk);
 
-    target.shape.addChild(path);
+    target.children.push({node: path, link: lk});
   },
   variable: (target)=>{
-    var variable = new Variable();
+    var obj = Layout.getClosestPosition(Math.floor(target.shape.x/Layout.cellW), Math.floor(target.shape.y/Layout.cellH));
+        
+    Layout.mark(obj.x, obj.y);
 
-    aya.link(target.shape.uuid, variable.shape.uuid, {end_dest: "triangle"});
+    var variable = new Variable({
+      style: 'template',
+      x: obj.x * Layout.cellW + Layout.cellW/2,
+      y: obj.y * Layout.cellH + Layout.cellH/2 
+    });
 
-    target.shape.addChild(variable);
+    var lk = aya.link(target.shape.uuid, variable.shape.uuid, {end_dest: "triangle"});
+    Register.add(lk.uuid, lk);
+
+    target.children.push({node: variable, link: lk});
   },
   resource: (target)=>{
-    var resource = new Resource({name: 'res'});
+    var obj = Layout.getClosestPosition(Math.floor(target.shape.x/Layout.cellW), Math.floor(target.shape.y/Layout.cellH));
+        
+    Layout.mark(obj.x, obj.y);
 
-    aya.link(target.shape.uuid, resource.shape.uuid, {end_dest: "triangle"});
+    var resource = new Resource({
+      name: 'res', 
+      x: obj.x * Layout.cellW + Layout.cellW/2,
+      y: obj.y * Layout.cellH + Layout.cellH/2 
+    });
+    var lk = aya.link(target.shape.uuid, resource.shape.uuid, {end_dest: "triangle"});
+    Register.add(lk.uuid, lk);
 
-    target.shape.addChild(resource);
+    target.children.push({node: resource, link: lk});
   },
-  // remove: (target)=>{
-  //   target.shape.children.map(({child})=>{
-  //     if (child.shape)
-  //         child.shape.removeFromDOM();
-  //     else  
-  //       child.removeFromDOM();
-  //     target.shape.removeFromDOM();
-  //   });
-  // }
+  remove: (target)=>{
+    var links = Register.findAllLink(target.shape);
+
+    if (links.length)
+      links.map((lk)=>{
+        lk.dest_end_csvg.remove();
+        lk.line.removeFromDOM();
+        Register.clear(lk.uuid);
+      });
+    if (target.children.length)
+      target.children.map((child, index)=>{
+        child.node.actions.remove(child.node);
+    });
+    target.shape.removeFromDOM();
+  }
 };

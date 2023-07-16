@@ -40,7 +40,7 @@ test("visual representation of a variable", assert=>{
 });
 
 test("Variable position on x_axis and y_axis.", function(assert){
-    var variable = new Variable({x: 10, y: 5 });
+    var variable = new Variable({style: 'template', x: 10, y: 5 });
     assert.equal(variable.shape.x, 10);
     assert.equal(variable.shape.y, 5);
 });
@@ -140,24 +140,24 @@ test('mouseleave() - set variable state to null', assert=>{
  * Tests releted to creating the corresponding method when a mousedown has been applied on an action
  */
 test("varactions.path(target) - create the path component as a child of the variable", assert=> {
-    var variable = Variable();
+    var variable = new Variable();
     varactions.path(variable);
 
-    assert.equal(variable.shape.children[0].child.type, 'path', 'path created');
+    assert.equal(variable.children[0].type, 'path', 'path created');
 });
 
 test("varactions.variable(target) - create the variable component as a child of the variable", assert=> {
-    var variable = Variable();
+    var variable = new Variable();
     varactions.variable(variable);
 
-    assert.equal(variable.shape.children[0].child.type, 'variable', 'variable created');
+    assert.equal(variable.children[0].type, 'variable', 'variable created');
 });
 
 test("varactions.resource(target) - create the resource component as a child of the variable", assert=> {
-    var variable = Variable();
+    var variable = new Variable();
     varactions.resource(variable);
 
-    assert.equal(variable.shape.children[0].child.type, 'resource', 'path created');
+    assert.equal(variable.children[0].child, 'resource', 'path created');
 });
 
 // test("varactions.remove(target) - delete the variable with its children", assert=> {

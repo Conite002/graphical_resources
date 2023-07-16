@@ -2,20 +2,22 @@ class Path {
     constructor(props = {path: '/'}){
         let x = 0;
         let y = 0;
-
-        if (props.x)
+        if (props.x && props.y){
             x = props.x;
-        if (props.y)
             y = props.y;
-
+        }
         this.path = props.path;
-
+  
         this.shape = aya.circle(x, y, P_RADIUS);
+
         this.shape.addChild(
             aya.text(this.shape.x - this.shape.r,
                 this.shape.y - this.shape.r - DELTA_Y, 
                 this.path,
-                SIZE)
+                SIZE,
+                0,
+                0,
+                false)
         );
         this.type = 'path';
         this.shape.makeHiddenCpoints();
@@ -24,6 +26,7 @@ class Path {
     
         this.actions = pathactions;
         this.panelPos = -1;
+        this.children = [];
 
         this.shape.setStyles({fill: P_FILL, stroke: P_STROKE, strokeWidth: P_STROKEWIDTH});
 

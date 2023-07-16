@@ -105,21 +105,21 @@ test("pathactions.path(target) - create the path component as a child of the pat
     var path = new Path();
     pathactions.path(path);
 
-    assert.equal(path.shape.children[1].child.type, 'path', 'path created');
+    assert.equal(path.children[0].type, 'path', 'path created');
 });
 
 test("pathactions.path(target) - create the variable component as a child of the path", assert=> {
     var path = new Path();
     pathactions.variable(path);
 
-    assert.equal(path.shape.children[1].child.type, 'variable', 'path created');
+    assert.equal(path.children[0].type, 'variable', 'variable created');
 });
 
 test("pathactions.resource(target) - create the resource component as a child of the path", assert=> {
     var path = new Path();
     pathactions.resource(path);
 
-    assert.equal(path.shape.children[1].child.type, 'resource', 'path created');
+    assert.equal(path.children[0].type, 'resource', 'path created');
 });
 
 // test("pathactions.remove(target) - delete the path with its children", assert=> {

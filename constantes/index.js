@@ -7,17 +7,17 @@ const DELTA_Y = 5;
 const RATIO = 3.2/5;
 
 const M_RADIUS = 3; // for resource method
-const RADIUS = 35;
+const RADIUS = 15;
 const SH_FILL = '#D9D7F1';
 const ImSZ = 28;
 
 
-const SVG_W = 1000;
-const SVG_H = 1000;
+const SVG_W = 1343;
+const SVG_H = 1343;
 
-const CELL_W = 110;
-const CELL_H = 110;
-
+const CELL_W = 40;
+const CELL_H = 40;
+const R = 50; //the radius for drawing children around a component
 
 const L_WIDTH = 40;
 const L_HEIGHT = 40;

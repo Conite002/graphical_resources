@@ -33,10 +33,15 @@
    <script src="src/entities/variable.js"></script>
    <script src="src/entities/path.js"></script>
 
+   <script src="src/layout.js"></script>
+   <script src="src/register.js"></script>
+
+
    <script>
       // var res = new Resource({name: "dpqqqds88989645564565", x: 130, y: 330});
+      Layout.init(SVG_W, SVG_H);
 
-      var variable = new Variable();
+      var path = new Path({path: '/', x: 500, y: 500});
 
    </script>
 </body>
