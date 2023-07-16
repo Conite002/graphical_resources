@@ -34,25 +34,17 @@ class Layout{
 
     static getClosestPosition(col, lig){
         let childrenPosition =  [
-            {x: -2, y: -2},
-            {x: 2, y: -2},
-            {x: 2, y: 2},
-            {x: -2, y: 2},
-            {x: -2, y: -4},
-            {x: 0, y: -3},
-            {x: 2, y: -4},
-            {x: 4, y: -2},
-            {x: 3, y: 0},
-            {x: 4, y: 2},
-            {x: 2, y: 4},
-            {x: 0, y: 3},
+            {x: -1, y: -3},
+            {x: 3, y: -2},
+            {x: 1, y: 3},
+            {x: -3, y: 1},
+            {x: -4, y: -2},
             {x: -2, y: 4},
-            {x: -4, y: 2},
-            {x: -3, y: 0},
-            {x: -4, y: -2}
+            {x: 4, y: 1},
+            {x: 2, y: -5},
         ];
         let obj = {};
-        for (var index = 0; index < 16; index++){
+        for (var index = 0; index < 8; index++){
             obj.x  = col + childrenPosition[index].x;
             obj.y = lig + childrenPosition[index].y;
             if (Layout.grid[obj.y * Layout.ncols + obj.x].ismark)

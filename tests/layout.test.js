@@ -71,270 +71,104 @@ test("Layout.unmark(col, lig) - unmark a case", assert=>{
     assert.equal(Layout.grid[2 * Layout.ncols + 1].ismark, false, "set case to available");
 });
 
+test("Layout.getClosestPosition(5, 5) - return (4, 2)", assert=>{
 
-/**
- * 
- */
-
-test("Layout.getClosestPosition(col, lig) - return the first closest case from the specified position that is free", assert=>{
-
-    var cell = Layout.getClosestPosition(4, 4);
-
-    assert.equal(cell.x, 2, 'check x');
-    assert.equal(cell.y, 2, 'check y');
-});
-
-test("Layout.getClosestPosition(col, lig) - return the first closest case from the specified position that is free", assert=>{
-    Layout.mark(2, 2);
-    var cell = Layout.getClosestPosition(4, 4);
-
-    assert.equal(cell.x, 6, 'check x');
-    assert.equal(cell.y, 2, 'check y');
-});
-
-test("Layout.getClosestPosition(col, lig) - return the second closest case from the specified position that is free when the specified case are not", assert=>{
-
-    Layout.mark(2, 2);
-    Layout.mark(6, 2);
-    var cell = Layout.getClosestPosition(4, 4);
-
-    assert.equal(cell.x, 6, 'check x');
-    assert.equal(cell.y, 6, 'check y');
-});
-
-test("Layout.getClosestPosition(col, lig) - return the fourth closest case from the specified position that is free when the specified case are not", assert=>{
-
-    Layout.mark(2, 2);
-    Layout.mark(6, 2);
-    Layout.mark(6, 6);
-
-    var cell = Layout.getClosestPosition(4, 4);
-
-    assert.equal(cell.x, 2, 'check x');
-    assert.equal(cell.y, 6, 'check y');
-});
-
-test("Layout.getClosestPosition(col, lig) - return the fifth closest case from the specified position that is free when the specified case are not", assert=>{
-
-    Layout.mark(2, 2);
-    Layout.mark(6, 2);
-    Layout.mark(6, 6);
-    Layout.mark(2, 6);
-
-    var cell = Layout.getClosestPosition(4, 4);
-
-    assert.equal(cell.x, 2, 'check x');
-    assert.equal(cell.y, 0, 'check y');
-});
-
-test("Layout.getClosestPosition(col, lig) - return the sixth closest case from the specified position that is free when the specified case are not", assert=>{
-
-    Layout.mark(2, 2);
-    Layout.mark(6, 2);
-    Layout.mark(6, 6);
-    Layout.mark(2, 6);
-    Layout.mark(2, 0);
-
-    var cell = Layout.getClosestPosition(4, 4);
+    var cell = Layout.getClosestPosition(5, 5);
 
     assert.equal(cell.x, 4, 'check x');
-    assert.equal(cell.y, 1, 'check y');
-});
-
-test("Layout.getClosestPosition(col, lig) - return the seventh closest case from the specified position that is free when the specified case are not", assert=>{
-
-    Layout.mark(2, 2);
-    Layout.mark(6, 2);
-    Layout.mark(6, 6);
-    Layout.mark(2, 6);
-    Layout.mark(2, 0);
-    Layout.mark(4, 1);
-
-    var cell = Layout.getClosestPosition(4, 4);
-
-    assert.equal(cell.x, 6, 'check x');
-    assert.equal(cell.y, 0, 'check y');
-});
-
-
-test("Layout.getClosestPosition(col, lig) - return the eighth closest case from the specified position that is free when the specified case are not", assert=>{
-
-    Layout.mark(2, 2);
-    Layout.mark(6, 2);
-    Layout.mark(6, 6);
-    Layout.mark(2, 6);
-    Layout.mark(2, 0);
-    Layout.mark(4, 1);
-    Layout.mark(6, 0);
-
-    var cell = Layout.getClosestPosition(4, 4);
-
-    assert.equal(cell.x, 8, 'check x');
     assert.equal(cell.y, 2, 'check y');
 });
 
-test("Layout.getClosestPosition(col, lig) - return the eighth closest case from the specified position that is free when the specified case are not", assert=>{
 
-    Layout.mark(2, 2);
-    Layout.mark(6, 2);
-    Layout.mark(6, 6);
-    Layout.mark(2, 6);
-    Layout.mark(2, 0);
-    Layout.mark(4, 1);
-    Layout.mark(6, 0);
-    Layout.mark(8, 2);
+test("Layout.getClosestPosition(5, 5) - return (8, 3)", assert=>{
 
-    var cell = Layout.getClosestPosition(4, 4);
-
-    assert.equal(cell.x, 7, 'check x');
-    assert.equal(cell.y, 4, 'check y');
-});
-
-test("Layout.getClosestPosition(col, lig) - return the eighth closest case from the specified position that is free when the specified case are not", assert=>{
-
-    Layout.mark(2, 2);
-    Layout.mark(6, 2);
-    Layout.mark(6, 6);
-    Layout.mark(2, 6);
-    Layout.mark(2, 0);
-    Layout.mark(4, 1);
-    Layout.mark(6, 0);
-    Layout.mark(8, 2);
-    Layout.mark(7, 4);
-
-    var cell = Layout.getClosestPosition(4, 4);
+    Layout.mark(4, 2);
+    var cell = Layout.getClosestPosition(5, 5);
 
     assert.equal(cell.x, 8, 'check x');
-    assert.equal(cell.y, 6, 'check y');
+    assert.equal(cell.y, 3, 'check y');
 });
 
+test("Layout.getClosestPosition(5, 5) - return (6, 8)", assert=>{
+    Layout.mark(4, 2);
+    Layout.mark(8, 3);
 
-test("Layout.getClosestPosition(col, lig) - return the eighth closest case from the specified position that is free when the specified case are not", assert=>{
-
-    Layout.mark(2, 2);
-    Layout.mark(6, 2);
-    Layout.mark(6, 6);
-    Layout.mark(2, 6);
-    Layout.mark(2, 0);
-    Layout.mark(4, 1);
-    Layout.mark(6, 0);
-    Layout.mark(8, 2);
-    Layout.mark(7, 4);
-    Layout.mark(8, 6);
-
-    var cell = Layout.getClosestPosition(4, 4);
+    var cell = Layout.getClosestPosition(5, 5);
 
     assert.equal(cell.x, 6, 'check x');
     assert.equal(cell.y, 8, 'check y');
 });
 
-test("Layout.getClosestPosition(col, lig) - return the eighth closest case from the specified position that is free when the specified case are not", assert=>{
+test("Layout.getClosestPosition(5, 5) - return (2, 6)", assert=>{
 
-    Layout.mark(2, 2);
-    Layout.mark(6, 2);
-    Layout.mark(6, 6);
-    Layout.mark(2, 6);
-    Layout.mark(2, 0);
-    Layout.mark(4, 1);
-    Layout.mark(6, 0);
-    Layout.mark(8, 2);
-    Layout.mark(7, 4);
-    Layout.mark(8, 6);
+    Layout.mark(4, 2);
+    Layout.mark(8, 3);
     Layout.mark(6, 8);
 
-    var cell = Layout.getClosestPosition(4, 4);
-
-    assert.equal(cell.x, 4, 'check x');
-    assert.equal(cell.y, 7, 'check y');
-});
-
-test("Layout.getClosestPosition(col, lig) - return the eighth closest case from the specified position that is free when the specified case are not", assert=>{
-
-    Layout.mark(2, 2);
-    Layout.mark(6, 2);
-    Layout.mark(6, 6);
-    Layout.mark(2, 6);
-    Layout.mark(2, 0);
-    Layout.mark(4, 1);
-    Layout.mark(6, 0);
-    Layout.mark(8, 2);
-    Layout.mark(7, 4);
-    Layout.mark(8, 6);
-    Layout.mark(6, 8);
-    Layout.mark(4, 7);
-
-    var cell = Layout.getClosestPosition(4, 4);
+    var cell = Layout.getClosestPosition(5, 5);
 
     assert.equal(cell.x, 2, 'check x');
-    assert.equal(cell.y, 8, 'check y');
-});
-
-test("Layout.getClosestPosition(col, lig) - return the eighth closest case from the specified position that is free when the specified case are not", assert=>{
-
-    Layout.mark(2, 2);
-    Layout.mark(6, 2);
-    Layout.mark(6, 6);
-    Layout.mark(2, 6);
-    Layout.mark(2, 0);
-    Layout.mark(4, 1);
-    Layout.mark(6, 0);
-    Layout.mark(8, 2);
-    Layout.mark(7, 4);
-    Layout.mark(8, 6);
-    Layout.mark(6, 8);
-    Layout.mark(4, 7);
-    Layout.mark(2, 8);
-
-    var cell = Layout.getClosestPosition(4, 4);
-
-    assert.equal(cell.x, 0, 'check x');
     assert.equal(cell.y, 6, 'check y');
 });
 
-test("Layout.getClosestPosition(col, lig) - return the eighth closest case from the specified position that is free when the specified case are not", assert=>{
+test("Layout.getClosestPosition(5, 5) - return (1, 3)", assert=>{
 
-    Layout.mark(2, 2);
-    Layout.mark(6, 2);
-    Layout.mark(6, 6);
-    Layout.mark(2, 6);
-    Layout.mark(2, 0);
-    Layout.mark(4, 1);
-    Layout.mark(6, 0);
-    Layout.mark(8, 2);
-    Layout.mark(7, 4);
-    Layout.mark(8, 6);
+    Layout.mark(4, 2);
+    Layout.mark(8, 3);
     Layout.mark(6, 8);
-    Layout.mark(4, 7);
-    Layout.mark(2, 8);
-    Layout.mark(0, 6);
+    Layout.mark(2, 6);
 
-    var cell = Layout.getClosestPosition(4, 4);
+    var cell = Layout.getClosestPosition(5, 5);
 
     assert.equal(cell.x, 1, 'check x');
-    assert.equal(cell.y, 4, 'check y');
+    assert.equal(cell.y, 3, 'check y');
+});
+
+test("Layout.getClosestPosition(5, 5) - return (3, 9)", assert=>{
+
+    Layout.mark(4, 2);
+    Layout.mark(8, 3);
+    Layout.mark(6, 8);
+    Layout.mark(2, 6);
+    Layout.mark(1, 3);
+
+    var cell = Layout.getClosestPosition(5, 5);
+
+    assert.equal(cell.x, 3, 'check x');
+    assert.equal(cell.y, 9, 'check y');
 });
 
 
-test("Layout.getClosestPosition(col, lig) - return the eighth closest case from the specified position that is free when the specified case are not", assert=>{
 
-    Layout.mark(2, 2);
-    Layout.mark(6, 2);
-    Layout.mark(6, 6);
-    Layout.mark(2, 6);
-    Layout.mark(2, 0);
-    Layout.mark(4, 1);
-    Layout.mark(6, 0);
-    Layout.mark(8, 2);
-    Layout.mark(7, 4);
-    Layout.mark(8, 6);
+test("Layout.getClosestPosition(5, 5) - return (9, 6)", assert=>{
+
+    Layout.mark(4, 2);
+    Layout.mark(8, 3);
     Layout.mark(6, 8);
-    Layout.mark(4, 7);
-    Layout.mark(2, 8);
-    Layout.mark(0, 6);
-    Layout.mark(1, 4);
+    Layout.mark(2, 6);
+    Layout.mark(1, 3);
+    Layout.mark(6, 8);
+    Layout.mark(3, 9);
 
-    var cell = Layout.getClosestPosition(4, 4);
+    var cell = Layout.getClosestPosition(5, 5);
 
-    assert.equal(cell.x, 0, 'check x');
-    assert.equal(cell.y, 2, 'check y');
+    assert.equal(cell.x, 9, 'check x');
+    assert.equal(cell.y, 6, 'check y');
+});
+
+test("Layout.getClosestPosition(5, 5) - return (7, 0)", assert=>{
+
+    Layout.mark(4, 2);
+    Layout.mark(8, 3);
+    Layout.mark(6, 8);
+    Layout.mark(2, 6);
+    Layout.mark(1, 3);
+    Layout.mark(6, 8);
+    Layout.mark(3, 9);
+    Layout.mark(9, 6);
+
+    var cell = Layout.getClosestPosition(5, 5);
+
+    assert.equal(cell.x, 7, 'check x');
+    assert.equal(cell.y, 0, 'check y');
 });
