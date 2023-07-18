@@ -52,4 +52,19 @@ class Layout{
             return obj;
         }
     }
+
+    static setPosition(col, lig){
+        if (!(lig - GRID_W >= 0))
+            lig = GRID_W;
+        else if (!(lig + GRID_W <= Layout.nligs))
+            lig = Layout.nligs - GRID_W;
+        if (!(col - GRID_W >= 0))
+            col = GRID_W;
+        else if (!(col + GRID_W <= Layout.ncols))
+            col = Layout.ncols - GRID_W;
+        return {
+            col: col,
+            lig: lig
+        }
+    }
 };

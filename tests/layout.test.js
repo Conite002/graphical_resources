@@ -139,7 +139,6 @@ test("Layout.getClosestPosition(5, 5) - return (3, 9)", assert=>{
 });
 
 
-
 test("Layout.getClosestPosition(5, 5) - return (9, 6)", assert=>{
 
     Layout.mark(4, 2);
@@ -172,3 +171,32 @@ test("Layout.getClosestPosition(5, 5) - return (7, 0)", assert=>{
     assert.equal(cell.x, 7, 'check x');
     assert.equal(cell.y, 0, 'check y');
 });
+
+
+test("Layout.setPosition(col, lig) - move the node when lig is too near the top", assert=>{
+    var grid = Layout.setPosition(9,2);
+
+    assert.equal(grid.col, 9, 'col is ok');
+    assert.equal(grid.lig, 5, 'reset lig');
+}); 
+
+test("Layout.setPosition(col, lig) - move the node when lig is too near the bottom", assert=>{
+    var grid = Layout.setPosition(9, Layout.nligs - 2);
+
+    assert.equal(grid.col, 9, 'col is ok');
+    assert.equal(grid.lig, Layout.nligs - GRID_W, 'reset lig');
+}); 
+
+test("Layout.setPosition(col, lig) - move the node when col is too near the left", assert=>{
+    var grid = Layout.setPosition(3,5);
+
+    assert.equal(grid.col, GRID_W, 'col is ok');
+    assert.equal(grid.lig, 5, 'reset lig');
+}); 
+
+test("Layout.setPosition(col, lig) - move the node when col is too near the right", assert=>{
+    var grid = Layout.setPosition(Layout.ncols - 2, Layout.nligs - 2);
+
+    assert.equal(grid.col, Layout.ncols - GRID_W, 'col is ok');
+    assert.equal(grid.lig, Layout.nligs - GRID_W, 'reset lig');
+}); 

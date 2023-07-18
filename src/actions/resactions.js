@@ -74,7 +74,7 @@ var resourceactions = {
       Layout.unmark(Math.floor(target.shape.x/Layout.cellW), Math.floor(target.shape.y/Layout.cellH));
       
       let links = Register.findAllLink(target.shape);
-      
+
       links.map((lk)=>{
         lk.dest_end_csvg.remove();
         lk.line.removeFromDOM();

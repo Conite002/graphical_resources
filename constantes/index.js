@@ -17,7 +17,7 @@ const SVG_H = 1343;
 
 const CELL_W = 40;
 const CELL_H = 40;
-const R = 50; //the radius for drawing children around a component
+const GRID_W = 5;
 
 const L_WIDTH = 40;
 const L_HEIGHT = 40;
