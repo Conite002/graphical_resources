@@ -73,30 +73,30 @@ test("Layout.unmark(col, lig) - unmark a case", assert=>{
 
 test("Layout.getClosestPosition(5, 5) - return (4, 2)", assert=>{
 
-    var cell = Layout.getClosestPosition(5, 5);
+    let { col, lig } = Layout.getClosestPosition(5, 5);
 
-    assert.equal(cell.x, 4, 'check x');
-    assert.equal(cell.y, 2, 'check y');
+    assert.equal(col, 4, 'check x');
+    assert.equal(lig, 2, 'check y');
 });
 
 
 test("Layout.getClosestPosition(5, 5) - return (8, 3)", assert=>{
 
     Layout.mark(4, 2);
-    var cell = Layout.getClosestPosition(5, 5);
+    let { col, lig } = Layout.getClosestPosition(5, 5);
 
-    assert.equal(cell.x, 8, 'check x');
-    assert.equal(cell.y, 3, 'check y');
+    assert.equal(col, 8, 'check x');
+    assert.equal(lig, 3, 'check y');
 });
 
 test("Layout.getClosestPosition(5, 5) - return (6, 8)", assert=>{
     Layout.mark(4, 2);
     Layout.mark(8, 3);
 
-    var cell = Layout.getClosestPosition(5, 5);
+    let { col, lig } = Layout.getClosestPosition(5, 5);
 
-    assert.equal(cell.x, 6, 'check x');
-    assert.equal(cell.y, 8, 'check y');
+    assert.equal(col, 6, 'check x');
+    assert.equal(lig, 8, 'check y');
 });
 
 test("Layout.getClosestPosition(5, 5) - return (2, 6)", assert=>{
@@ -105,10 +105,10 @@ test("Layout.getClosestPosition(5, 5) - return (2, 6)", assert=>{
     Layout.mark(8, 3);
     Layout.mark(6, 8);
 
-    var cell = Layout.getClosestPosition(5, 5);
+    let { col, lig } = Layout.getClosestPosition(5, 5);
 
-    assert.equal(cell.x, 2, 'check x');
-    assert.equal(cell.y, 6, 'check y');
+    assert.equal(col, 2, 'check x');
+    assert.equal(lig, 6, 'check y');
 });
 
 test("Layout.getClosestPosition(5, 5) - return (1, 3)", assert=>{
@@ -118,10 +118,10 @@ test("Layout.getClosestPosition(5, 5) - return (1, 3)", assert=>{
     Layout.mark(6, 8);
     Layout.mark(2, 6);
 
-    var cell = Layout.getClosestPosition(5, 5);
+    let { col, lig } = Layout.getClosestPosition(5, 5);
 
-    assert.equal(cell.x, 1, 'check x');
-    assert.equal(cell.y, 3, 'check y');
+    assert.equal(col, 1, 'check x');
+    assert.equal(lig, 3, 'check y');
 });
 
 test("Layout.getClosestPosition(5, 5) - return (3, 9)", assert=>{
@@ -132,12 +132,11 @@ test("Layout.getClosestPosition(5, 5) - return (3, 9)", assert=>{
     Layout.mark(2, 6);
     Layout.mark(1, 3);
 
-    var cell = Layout.getClosestPosition(5, 5);
+    let { col, lig } = Layout.getClosestPosition(5, 5);
 
-    assert.equal(cell.x, 3, 'check x');
-    assert.equal(cell.y, 9, 'check y');
+    assert.equal(col, 3, 'check x');
+    assert.equal(lig, 9, 'check y');
 });
-
 
 
 test("Layout.getClosestPosition(5, 5) - return (9, 6)", assert=>{
@@ -150,14 +149,13 @@ test("Layout.getClosestPosition(5, 5) - return (9, 6)", assert=>{
     Layout.mark(6, 8);
     Layout.mark(3, 9);
 
-    var cell = Layout.getClosestPosition(5, 5);
+    let { col, lig } = Layout.getClosestPosition(5, 5);
 
-    assert.equal(cell.x, 9, 'check x');
-    assert.equal(cell.y, 6, 'check y');
+    assert.equal(col, 9, 'check x');
+    assert.equal(lig, 6, 'check y');
 });
 
 test("Layout.getClosestPosition(5, 5) - return (7, 0)", assert=>{
-
     Layout.mark(4, 2);
     Layout.mark(8, 3);
     Layout.mark(6, 8);
@@ -167,67 +165,83 @@ test("Layout.getClosestPosition(5, 5) - return (7, 0)", assert=>{
     Layout.mark(3, 9);
     Layout.mark(9, 6);
 
-    var cell = Layout.getClosestPosition(5, 5);
+    let { col, lig } = Layout.getClosestPosition(5, 5);
 
-    assert.equal(cell.x, 7, 'check x');
-    assert.equal(cell.y, 0, 'check y');
+    assert.equal(col, 7, 'check x');
+    assert.equal(lig, 0, 'check y');
 });
 
 
 // top 
 test("Layout.getClosestPosition(3, 3) - return (4, 6)", assert=>{
-    var cell = Layout.getClosestPosition(3, 3);
+    let { col, lig } = Layout.getClosestPosition(3, 3);
     
-    assert.equal(cell.x, 4, 'check x');
-    assert.equal(cell.y, 6, 'check y');
+    assert.equal(col, 4, 'check x');
+    assert.equal(lig, 6, 'check y');
 });
 
 test("Layout.getClosestPosition(33, 3) - return (30, 4)", assert=>{
-    var cell = Layout.getClosestPosition(33, 3);
+    let { col, lig } = Layout.getClosestPosition(33, 3);
     
-    assert.equal(cell.x, 30, 'check x');
-    assert.equal(cell.y, 4, 'check y');
+    assert.equal(col, 30, 'check x');
+    assert.equal(lig, 4, 'check y');
 });
 
 test("Layout.getClosestPosition(5, 3) - return (6, 8)", assert=>{
-    var cell = Layout.getClosestPosition(5, 3);
+    let { col, lig } = Layout.getClosestPosition(5, 3);
 
-    assert.equal(cell.x, 6, 'check x');
-    assert.equal(cell.y, 6, 'check y');
+    assert.equal(col, 6, 'check x');
+    assert.equal(lig, 6, 'check y');
 });
 
 // bottom
 test("Layout.getClosestPosition(3, 33) - return (6, 31)", assert=>{
-    var cell = Layout.getClosestPosition(3, 33);
+    let { col, lig } = Layout.getClosestPosition(3, 33);
 
-    assert.equal(cell.x, 6, 'check x');
-    assert.equal(cell.y, 31, 'check y');
+    assert.equal(col, 6, 'check x');
+    assert.equal(lig, 31, 'check y');
 });
 
 test("Layout.getClosestPosition(33, 33) - return (32, 30)", assert=>{
-    var cell = Layout.getClosestPosition(33, 33);
+    let { col, lig } = Layout.getClosestPosition(33, 33);
 
-    assert.equal(cell.x, 32, 'check x');
-    assert.equal(cell.y, 30, 'check y');
+    assert.equal(col, 32, 'check x');
+    assert.equal(lig, 30, 'check y');
 });
 
 test("Layout.getClosestPosition(6, 33) - return (5, 30)", assert=>{
-    var cell = Layout.getClosestPosition(6, 33);
+    let { col, lig } = Layout.getClosestPosition(6, 33);
 
-    assert.equal(cell.x, 5, 'check x');
-    assert.equal(cell.y, 30, 'check y');
+    assert.equal(col, 5, 'check x');
+    assert.equal(lig, 30, 'check y');
 });
 // left
 test("Layout.getClosestPosition(3, 20) - return (6, 18)", assert=>{
-    var cell = Layout.getClosestPosition(3, 20);
+    let { col, lig } = Layout.getClosestPosition(3, 20);
 
-    assert.equal(cell.x, 6, 'check x');
-    assert.equal(cell.y, 18, 'check y');
+    assert.equal(col, 6, 'check x');
+    assert.equal(lig, 18, 'check y');
 });
 // right
 test("Layout.getClosestPosition(33, 8) - return (32, 5)", assert=>{
-    var cell = Layout.getClosestPosition(33, 8);
+    let { col, lig } = Layout.getClosestPosition(33, 8);
 
-    assert.equal(cell.x, 32, 'check x');
-    assert.equal(cell.y, 5, 'check y');
+    assert.equal(col, 32, 'check x');
+    assert.equal(lig, 5, 'check y');
+});
+
+test("return (col, lig) = (0, 0) when the number of child is more than 8", assert=>{
+    Layout.mark(4, 2);
+    Layout.mark(8, 3);
+    Layout.mark(6, 8);
+    Layout.mark(2, 6);
+    Layout.mark(1, 3);
+    Layout.mark(3, 9);
+    Layout.mark(9, 6);
+    Layout.mark(7, 0);
+
+    let { col, lig } = Layout.getClosestPosition(5, 5);
+
+    assert.equal(col, 0, "check x");
+    assert.equal(lig, 0, "check y");
 });

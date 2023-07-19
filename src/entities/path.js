@@ -17,7 +17,8 @@ class Path {
                 SIZE,
                 0,
                 0,
-                false)
+                false
+            )
         );
         this.type = 'path';
         this.shape.makeHiddenCpoints();
@@ -51,5 +52,5 @@ var pathmouseovercb = (target, e)=>{
 };
 
 var pathmouseleavecb = (target, e)=>{
-Events.onmouseleave(target);
+    Events.onmouseleave(target);
 };

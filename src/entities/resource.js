@@ -68,7 +68,7 @@ var resmouseovercb = (target, e)=>{
 };
 
 var resmouseleavecb = (target, e)=>{
-  Events.onmouseleave(target);
+    Events.onmouseleave(target);
 };
 
 /**
