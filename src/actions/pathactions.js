@@ -7,7 +7,6 @@ var pathactions = {
     ],
     path: (target)=>{
         var obj = Layout.getClosestPosition(Math.floor(target.shape.x/Layout.cellW), Math.floor(target.shape.y/Layout.cellH));
-            
         Layout.mark(obj.x, obj.y);
     
         var path = new Path({

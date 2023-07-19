@@ -172,3 +172,62 @@ test("Layout.getClosestPosition(5, 5) - return (7, 0)", assert=>{
     assert.equal(cell.x, 7, 'check x');
     assert.equal(cell.y, 0, 'check y');
 });
+
+
+// top 
+test("Layout.getClosestPosition(3, 3) - return (4, 6)", assert=>{
+    var cell = Layout.getClosestPosition(3, 3);
+    
+    assert.equal(cell.x, 4, 'check x');
+    assert.equal(cell.y, 6, 'check y');
+});
+
+test("Layout.getClosestPosition(33, 3) - return (30, 4)", assert=>{
+    var cell = Layout.getClosestPosition(33, 3);
+    
+    assert.equal(cell.x, 30, 'check x');
+    assert.equal(cell.y, 4, 'check y');
+});
+
+test("Layout.getClosestPosition(5, 3) - return (6, 8)", assert=>{
+    var cell = Layout.getClosestPosition(5, 3);
+
+    assert.equal(cell.x, 6, 'check x');
+    assert.equal(cell.y, 6, 'check y');
+});
+
+// bottom
+test("Layout.getClosestPosition(3, 33) - return (6, 31)", assert=>{
+    var cell = Layout.getClosestPosition(3, 33);
+
+    assert.equal(cell.x, 6, 'check x');
+    assert.equal(cell.y, 31, 'check y');
+});
+
+test("Layout.getClosestPosition(33, 33) - return (32, 30)", assert=>{
+    var cell = Layout.getClosestPosition(33, 33);
+
+    assert.equal(cell.x, 32, 'check x');
+    assert.equal(cell.y, 30, 'check y');
+});
+
+test("Layout.getClosestPosition(6, 33) - return (5, 30)", assert=>{
+    var cell = Layout.getClosestPosition(6, 33);
+
+    assert.equal(cell.x, 5, 'check x');
+    assert.equal(cell.y, 30, 'check y');
+});
+// left
+test("Layout.getClosestPosition(3, 20) - return (6, 18)", assert=>{
+    var cell = Layout.getClosestPosition(3, 20);
+
+    assert.equal(cell.x, 6, 'check x');
+    assert.equal(cell.y, 18, 'check y');
+});
+// right
+test("Layout.getClosestPosition(33, 8) - return (32, 5)", assert=>{
+    var cell = Layout.getClosestPosition(33, 8);
+
+    assert.equal(cell.x, 32, 'check x');
+    assert.equal(cell.y, 5, 'check y');
+});

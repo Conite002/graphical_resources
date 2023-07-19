@@ -47,9 +47,64 @@ class Layout{
         for (var index = 0; index < 8; index++){
             obj.x  = col + childrenPosition[index].x;
             obj.y = lig + childrenPosition[index].y;
-            if (Layout.grid[obj.y * Layout.ncols + obj.x].ismark)
-                continue;
-            return obj;
+            if (lig - GRID_W >= 0 && lig + GRID_W <= Layout.nligs && col - GRID_W >= 0 && col + GRID_W <= Layout.ncols){
+                if (Layout.grid[obj.y * Layout.ncols + obj.x].ismark)
+                    continue;
+                else 
+                    return obj;
+            }
+            // top
+            else if (lig - GRID_W <= 0 && col - GRID_W <= 0){
+                if (obj.x >= col && obj.y >= lig && !Layout.grid[obj.y * Layout.ncols + obj.x].ismark)
+                    return obj;
+                else
+                    continue;
+            }
+            else if (lig - GRID_W <= 0 && col + GRID_W >= Layout.ncols){
+                if (obj.x <= col && obj.y >= lig && !Layout.grid[obj.y * Layout.ncols + obj.x].ismark)
+                    return obj;
+                else
+                    continue;
+            }
+            else if (lig - GRID_W <=0 && col >= GRID_W && col <= Layout.ncols){
+                if (obj.y >= lig && !Layout.grid[obj.y * Layout.ncols + obj.x].ismark)
+                    return obj;
+                else 
+                    continue;
+            }
+            // bottom
+            else if (lig + GRID_W >= Layout.nligs && col - GRID_W <= 0){
+                if (obj.x >= col && obj.y <= lig && !Layout.grid[obj.y * Layout.ncols + obj.x].ismark)
+                    return obj;
+                else
+                    continue;
+            }
+            else if (lig + GRID_W >= Layout.nligs && col + GRID_W >= Layout.ncols){
+                if (obj.x <= col && obj.y <= lig && !Layout.grid[obj.y * Layout.ncols + obj.x].ismark)
+                    return obj;
+                else
+                    continue;
+            }
+            else if (lig + GRID_W >= Layout.nligs && col >= GRID_W && col <= Layout.ncols){
+                if (obj.y <= lig && !Layout.grid[obj.y * Layout.ncols + obj.x].ismark)
+                    return obj;
+                else 
+                    continue;
+            }
+            // left
+            else if (col - GRID_W <= 0 && lig >= GRID_W && lig <= Layout.nligs){
+                if (obj.x >= col && !Layout.grid[obj.y * Layout.ncols + obj.x].ismark)
+                    return obj;
+                else 
+                    continue;
+            }
+            // right
+            else if (col + GRID_W >= Layout.ncols && lig >= GRID_W && lig <= Layout.nligs){
+                if (obj.x <= col && !Layout.grid[obj.y * Layout.ncols + obj.x].ismark)
+                    return obj;
+                else 
+                    continue;
+            }
         }
     }
 };
