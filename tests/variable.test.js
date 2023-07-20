@@ -143,26 +143,32 @@ test("varactions.path(target) - create the path component as a child of the vari
     var variable = new Variable();
     varactions.path(variable);
 
-    assert.equal(variable.children[0].type, 'path', 'path created');
+    assert.equal(variable.children[0].node.type, 'path', 'path created');
 });
 
 test("varactions.variable(target) - create the variable component as a child of the variable", assert=> {
     var variable = new Variable();
     varactions.variable(variable);
 
-    assert.equal(variable.children[0].type, 'variable', 'variable created');
+    assert.equal(variable.children[0].node.type, 'variable', 'variable created');
 });
 
 test("varactions.resource(target) - create the resource component as a child of the variable", assert=> {
     var variable = new Variable();
     varactions.resource(variable);
 
-    assert.equal(variable.children[0].child, 'resource', 'path created');
+    assert.equal(variable.children[0].node.type, 'resource', 'path created');
 });
 
-// test("varactions.remove(target) - delete the variable with its children", assert=> {
-//     var variable = Variable();
-//     varactions.remove(variable);
-
-//     assert.equal(variable.shape.children.length, 0, 'variable deleted');
-// });
+test("varactions.remove(target) - delete the variable with its children", assert=> {
+    var variable = new Variable();
+    var path = new Path();
+    for (var i = 0; i <= 10; i++){
+        variable.children.push({node: path});
+    };
+    varactions.remove(path);
+   
+    variable.children.map((child)=>{
+        assert.true(child.node.isDeleted, 'path deleted');
+    });
+});

@@ -321,7 +321,6 @@ var aya = {
           lozenge: (x, y, width, height, isdrawing, issave, uuid = undefined)=>{
              var id =  Math.random().toString(36).substring(2, 15) +
                          Math.random().toString(36).substring(2, 15); 
-             console.log(this);
              var Obj = {
                 uuid: uuid || id,
                 events: [],

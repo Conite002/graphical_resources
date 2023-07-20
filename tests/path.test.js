@@ -105,26 +105,32 @@ test("pathactions.path(target) - create the path component as a child of the pat
     var path = new Path();
     pathactions.path(path);
 
-    assert.equal(path.children[0].type, 'path', 'path created');
+    assert.equal(path.children[0].node.type, 'path', 'path created');
 });
 
 test("pathactions.path(target) - create the variable component as a child of the path", assert=> {
     var path = new Path();
     pathactions.variable(path);
 
-    assert.equal(path.children[0].type, 'variable', 'variable created');
+    assert.equal(path.children[0].node.type, 'variable', 'variable created');
 });
 
 test("pathactions.resource(target) - create the resource component as a child of the path", assert=> {
     var path = new Path();
     pathactions.resource(path);
 
-    assert.equal(path.children[0].type, 'resource', 'path created');
+    assert.equal(path.children[0].node.type, 'resource', 'path created');
 });
 
-// test("pathactions.remove(target) - delete the path with its children", assert=> {
-//     var path = new Path();
-//     pathactions.remove(path);
-
-//     assert.equal(path.shape.children.length, 0, 'path deleted');
-// });
+test("pathactions.remove(target) - delete the path with its children", assert=> {
+    var path = new Path();
+    var subpath = new Path();
+    for (var i = 0; i <= 10; i++){
+        path.children.push({node: subpath});
+    };
+    pathactions.remove(path);
+   
+    path.children.map((child)=>{
+        assert.true(child.node.isDeleted, 'path deleted');
+    });
+});

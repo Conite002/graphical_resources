@@ -20,6 +20,7 @@ class Path{
         this.panelPos = -1;
         this.actions = pathactions;
         this.type = 'path';
+        this.children = [];
     }
 }
 
@@ -37,3 +38,29 @@ var Panel = {
 
     }
 };
+
+class Layout{
+    static getClosestPosition(col, lig){
+        return {
+            col: 0,
+            lig: 0
+        };
+    }
+
+    static mark(col, lig){
+    }
+
+    static unmark(col, lig){
+    }
+};
+
+
+class Register{
+    static add(id, obj){}
+
+    static findAllLink(component){ return;}
+}
+
+var resourceactions = {};
+
+var varactions = {};

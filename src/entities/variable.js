@@ -24,6 +24,7 @@ class Variable{
         this.type = 'variable';
         this.panelPos = -1;
         this.actions = varactions;
+        this.isDeleted = false;
         this.children = [];
         this.shape = aya.lozenge(x, y, L_WIDTH, L_HEIGHT);
 

@@ -11,7 +11,6 @@ var pathactions = {
         Math.floor(target.shape.y/Layout.cellH)
       );
       Layout.mark(col, lig);
-  
       let path = new Path({
           path: '/',
           x: col * Layout.cellW + Layout.cellW/2,
@@ -24,7 +23,6 @@ var pathactions = {
         {end_dest: "triangle"}
       );
       Register.add(lk.uuid, lk);
-
       target.children.push({node: path});
     },
     variable: (target)=>{
@@ -46,7 +44,6 @@ var pathactions = {
         {end_dest: "triangle"}
       );
       Register.add(lk.uuid, lk);
-
       target.children.push({node: variable});
     },
     resource: (target)=>{
@@ -66,25 +63,25 @@ var pathactions = {
         resource.shape.uuid, 
         {end_dest: "triangle"}
       );
-
       Register.add(lk.uuid, lk);
-  
       target.children.push({node: resource});
     },
     remove: (target)=>{
       var links = Register.findAllLink(target.shape);
-  
-      if (links.length)
-        links.map((lk)=>{
+
+      links && links.map((lk)=>{
           lk.dest_end_csvg.remove();
           lk.line.removeFromDOM();
           Register.clear(lk.uuid);
-        });
-      if (target.children.length)
-        target.children.map((child)=>{
+      });
+      target.children.length && target.children.map((child)=>{
           child.node.actions.remove(child.node);
-        });
-      target.shape.removeFromDOM();
+      });
+      Layout.unmark(
+        Math.floor(target.shape.x/Layout.cellW), 
+        Math.floor(target.shape.y/Layout.cellH)
+      );
+      target.isDeleted == false ? target.shape.removeFromDOM() : undefined;
+      target.isDeleted = true;
     }
   };
-  

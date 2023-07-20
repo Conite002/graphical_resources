@@ -20,6 +20,7 @@ class Path {
                 false
             )
         );
+        this.isDeleted = false;
         this.type = 'path';
         this.shape.makeHiddenCpoints();
         this.shape.makeHiddenVertex();
