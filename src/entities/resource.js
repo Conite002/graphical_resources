@@ -12,9 +12,10 @@ class Resource {
     this.name = props.name;
 
 
-    this.shape = aya.circle(x, y, RADIUS);
+    this.shape = aya.circle(x, y, R_RADIUS);
 
     this.type = 'resource';
+    this.isDeleted = false;
     this.shape.makeHiddenCpoints();
     this.shape.makeHiddenVertex();
     this.shape.removeBoxFromDOM();

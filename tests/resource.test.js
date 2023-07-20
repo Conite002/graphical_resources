@@ -31,7 +31,7 @@ test('Resource object checking after its creation', assert=>{
 test("Visual representation of a resource ", function(assert) {
     var res = new Resource({ name: "res" });
     assert.equal(res.shape.type, "circle", "set shape");
-    assert.equal(res.shape.r, RADIUS, "set r");
+    assert.equal(res.shape.r, R_RADIUS, "set r");
     assert.equal(res.shape.x, 0, "set x");
     assert.equal(res.shape.y, 0, "set y");
     assert.equal(res.shape.fill, SH_FILL, "set color");

@@ -7,7 +7,7 @@ const DELTA_Y = 5;
 const RATIO = 3.2/5;
 
 const M_RADIUS = 3; // for resource method
-const RADIUS = 15;
+const R_RADIUS = 20;
 const SH_FILL = '#D9D7F1';
 const ImSZ = 28;
 

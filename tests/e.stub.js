@@ -1,6 +1,6 @@
 class Resource{
     constructor(){
-        this.shape = aya.circle(0,0,RADIUS);
+        this.shape = aya.circle(0,0,R_RADIUS);
         this.panelPos = -1;
             this.actions_t = [
                 {name: "get", path: "src/images/get.jpg"},
