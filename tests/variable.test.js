@@ -80,7 +80,7 @@ test("display variable name when style is template", assert=>{
     assert.equal(v.shape.children[0].child.type, 'text', 'set type of variable\'s child');
     assert.equal(v.shape.children[0].child.x, v.shape.x - v.shape.width, 'set x');
     assert.equal(v.shape.children[0].child.y, v.shape.y - DELTA_Y, 'set y');
-    assert.equal(v.shape.children[0].child.text, '{template}', 'set text value');
+    assert.equal(v.shape.children[0].child.text, '{userId}', 'set text value');
 });
 
 test("display variable name when style is query", assert=>{
@@ -89,7 +89,7 @@ test("display variable name when style is query", assert=>{
     assert.equal(v.shape.children[0].child.type, 'text', 'set type of variable\'s child');
     assert.equal(v.shape.children[0].child.x, v.shape.x - v.shape.width, 'set x');
     assert.equal(v.shape.children[0].child.y, v.shape.y - DELTA_Y, 'set y');
-    assert.equal(v.shape.children[0].child.text, '{query?}', 'set text value');
+    assert.equal(v.shape.children[0].child.text, '{userId?}', 'set text value');
 
 });
 
@@ -99,7 +99,7 @@ test("display variable name when style is plain", assert=>{
     assert.equal(v.shape.children[0].child.type, 'text', 'set type of variable\'s child');
     assert.equal(v.shape.children[0].child.x, v.shape.x - v.shape.width, 'set x');
     assert.equal(v.shape.children[0].child.y, v.shape.y - DELTA_Y, 'set y');
-    assert.equal(v.shape.children[0].child.text, '{plain}', 'set text value');
+    assert.equal(v.shape.children[0].child.text, '{userId}', 'set text value');
 });
 
 
