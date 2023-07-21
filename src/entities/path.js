@@ -38,10 +38,15 @@ class Path {
         this.shape.addEvent("mouseleave", (e) => {
             pathmouseleavecb(this, e);
         });
+        this.shape.addEvent('click', (e)=>{
+			Events.onclick(this);
+		});
     }
 
     setPath(value){
         this.path = value;
+        this.shape.children[0].child.text = this.path;
+        this.shape.children[0].child.textPath.textContent = this.path;
     }
 }
 

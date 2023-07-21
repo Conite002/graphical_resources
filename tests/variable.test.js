@@ -116,6 +116,12 @@ test("Add mouseleave on the variable", assert => {
     assert.equal(typeof variable.shape.events["mouseleave"], "function", "set mouseleave");
 });
 
+// onclick event for configuring the Variable
+test("Add onclick event on the variable", assert => {
+    var variable = new Variable();
+    assert.equal(typeof variable.shape.events["click"], "function", "onclick event setted");
+});
+
 
 /**
  * Tests related to events callbacks on the resource
@@ -129,12 +135,25 @@ test('mouseovercb() - set variable state to component', assert=>{
     assert.equal(variable.state, 'component', 'state changed to component');
 });
 
-test('mouseleave() - set variable state to null', assert=>{
+
+test('mouseleavecb() - set variable state to null', assert=>{
     var variable = new Variable();
 
     varmouseleavecb(variable);
     assert.equal(variable.state, null, 'state = null');
 });
+
+
+// onclick event callback for configuring the Variable
+test('onclick() - set config node to the clicked node', assert=>{
+    var variable = new Variable();
+
+    assert.equal(Events.config.node, null, 'node is undefined');
+
+    Events.onclick(variable);
+    assert.equal(Events.config.node.type, variable.type, 'set config node');
+});
+
 
 /**
  * Tests releted to creating the corresponding method when a mousedown has been applied on an action

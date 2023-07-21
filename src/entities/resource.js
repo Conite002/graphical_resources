@@ -38,16 +38,8 @@ class Resource {
 
     var text = aya.text(0, this.shape.y + DELTA_Y, this.name, 0, 0, 0, false);
     this.shape.addChild(text, null, null, true);
-    var t_width = getText(this.name).width;
 
-    if (t_width > this.shape.r * 2) {
-      text.text = reduceText(t_width, this.shape.r * 2, this.name);
-      text.c_svg.textContent = text.text;
-      t_width = getText(text.text).width;
-    }
-    var deltaX = (this.shape.r * 2 - t_width)/2;
-    text.x = this.shape.x - this.shape.r + deltaX/2;
-    text.redraw();
+    setTextSize(text, this.shape, this.name);  
 
     this.shape.addEvent("mouseover", (e) => {
       resmouseovercb(this, e);
@@ -55,10 +47,16 @@ class Resource {
     this.shape.addEvent("mouseleave", (e) => {
       resmouseleavecb(this, e);
     });
+    this.shape.addEvent('click', (e)=>{
+			Events.onclick(this);
+		});
   }
 
   setName(value){
     this.name = value;
+    this.shape.children[0].child.text = this.name;
+    this.shape.children[0].child.textPath.textContent = this.name;
+    setTextSize(this.shape.children[0].child, this.shape, this.name);  
   }
 }
 
@@ -71,7 +69,3 @@ var resmouseovercb = (target, e)=>{
 var resmouseleavecb = (target, e)=>{
     Events.onmouseleave(target);
 };
-
-/**
- * apply variable on the resource, precisely on the method callback
- */

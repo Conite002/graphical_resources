@@ -98,8 +98,6 @@ test("Resource name - reduce text element to the resource when it's too long", a
 });
 
 
-
-
 /**
  * Test: Add mouseover and mouseleave on resource
  */
@@ -109,9 +107,17 @@ test("Add mouseover on the resource", assert => {
     assert.equal(typeof res.shape.events["mouseover"], "function", "set mouseover");
 });
 
+
 test("Add mouseleave on the resource", assert => {
     var res = new Resource({name: "resource"});
     assert.equal(typeof res.shape.events["mouseleave"], "function", "set mouseleave");
+});
+
+
+// onclick event for configuring the Resource
+test("Add onclick event on the resource", assert => {
+    var res = new Resource({name: "resource"});
+    assert.equal(typeof res.shape.events["click"], "function", "onclick event setted");
 });
 
 
@@ -127,10 +133,22 @@ test('mouseovercb() - set resource state to component', assert=>{
     assert.equal(res.state, 'component', 'state changed to component');
 });
 
-test('mouseleave() - set resource state to null', assert=>{
+
+test('mouseleavecb() - set resource state to null', assert=>{
     var res = new Resource({name: "resource"});
     resmouseleavecb(res);
     assert.equal(res.state, null, 'state = null');
+});
+
+
+// onclick event callback for configuring the Resource
+test('onclick() - set config node to the clicked node', assert=>{
+    var resource = new Resource();
+
+    assert.equal(Events.config.node, null, 'node is undefined');
+
+    Events.onclick(resource);
+    assert.equal(Events.config.node.type, resource.type, 'set config node');
 });
 
 

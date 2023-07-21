@@ -70,7 +70,6 @@ test("add mouseover on the shape", assert=>{
 /**
  * Tests related to mouseleave event on the path shape
  */
-
 test("add mouseleave on the shape", assert=>{
     var path = new Path();
     assert.equal(typeof path.shape.events["mouseleave"], "function", "set mouseleave");
@@ -78,10 +77,18 @@ test("add mouseleave on the shape", assert=>{
 });
 
 
-/**
- * Tests related to mouseover on the panel
- */
+// set up onclick event for configuring the Path
+test("add onclick event on the shape", assert=>{
+    var path = new Path();
+    assert.equal(typeof path.shape.events["click"], "function", "set onclick event");
 
+});
+
+
+
+/**
+ * Tests related to mouseover, moseleave callback on the panel
+ */
 test('mouseovercb() - set path state to component', assert=>{
     var path = new Path();
 
@@ -95,6 +102,16 @@ test('mouseleave() - set path state to null', assert=>{
 
     pathmouseleavecb(path);
     assert.equal(path.state, null, 'state = null');
+});
+
+// onclick event callback for configuring the Path
+test('onclick() - set config node to the clicked node', assert=>{
+    var path = new Path();
+
+    assert.equal(Events.config.node, null, 'node is undefined');
+
+    Events.onclick(path);
+    assert.equal(Events.config.node.type, path.type, 'set config node');
 });
 
 

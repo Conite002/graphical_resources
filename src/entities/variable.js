@@ -15,11 +15,11 @@ class Variable{
         this.style = props.style;
 
         if (this.style == 'template')
-            text = '{'+ this.style + '}';
+            text = '{'+ this.name + '}';
         else if (this.style == 'plain')
-            text = '{'+ this.style + '}';
+            text = '{'+ this.name + '}';
         else 
-            text = '{'+ this.style + '?}';
+            text = '{'+ this.name + '?}';
 
         this.type = 'variable';
         this.panelPos = -1;
@@ -48,16 +48,35 @@ class Variable{
         this.shape.addEvent('mouseleave', (e)=>{
             varmouseleavecb(this, e)
         });
+        this.shape.addEvent('click', (e)=>{
+			Events.onclick(this);
+		});
     }
 
     setStyle(value){
         if (value && !['template', 'plain', 'query'].includes(value))
             throw new Error('style is not correct');
         this.style = value;
-    }
+        if (this.style == 'template'){
+            this.shape.children[0].child.text = '{'+ this.name + '}';
+            this.shape.children[0].child.textPath.textContent = '{'+ this.name + '}';
+        }
+        else if (this.style == 'plain'){
+            this.shape.children[0].child.text = '{'+ this.name + '}';
+            this.shape.children[0].child.textPath.textContent = '{'+ this.name + '}';
+
+        }
+        else{
+            this.shape.children[0].child.text = '{'+ this.name + '?}';
+            this.shape.children[0].child.textPath.textContent = '{'+ this.name + '?}';
+        }
+    }            text = '{'+ this.name + '?}';
+
 
     setName(value){
         this.name = value;
+        this.shape.children[0].child.text = this.name;
+        this.shape.children[0].child.textPath.textContent = this.name;
     }
 }
 
