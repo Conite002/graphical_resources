@@ -1,9 +1,4 @@
-const _new = ()=>{
-    var path = new Path({path: '/', x: 500, y: 500});
-};
-
 const editor = () => {
-    // path ->  path name
     var path = () => {
         return {
             view(vnode) {
@@ -20,7 +15,6 @@ const editor = () => {
             }
         }
     };
-
     var variable = () => {
         return {
             view(vnode) {

@@ -21,11 +21,11 @@ class Resource {
     this.shape.removeBoxFromDOM();
 
     this.actions_t = [
-        {name: "get", path: "src/images/get.jpg"},
-        {name: "post", path: "src/images/post.jpg"},
-        {name: "put", path: "src/images/put.jpg"},
-        {name: "del", path: "src/images/delete.jpg"},
-        {name: "remove", path: "src/images/trash.png"}
+      {name: "get", path: "src/images/get.jpg"},
+      {name: "post", path: "src/images/post.jpg"},
+      {name: "put", path: "src/images/put.jpg"},
+      {name: "del", path: "src/images/delete.jpg"},
+      {name: "remove", path: "src/images/trash.png"}
     ];
 
     this.actions = resourceactions;

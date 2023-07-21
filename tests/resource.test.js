@@ -161,8 +161,8 @@ test("resourceactions.get(target) - create the get method as a child of the reso
     assert.equal(method.type, 'circle');
     assert.equal(method.fill, 'black', 'black point');
     assert.equal(method.r, 3, 'radius is 5');
-    assert.equal(method.x, Math.cos( ( (60 - 0 * 30 ) * Math.PI) / 180) * res.shape.r + res.shape.x, "set x");
-    assert.equal(method.y, Math.sin( ( (60 - 0 * 30 ) *  Math.PI) / 180) * res.shape.r + res.shape.y, "set y");
+    assert.equal(method.x, Math.cos(((60 - 0 * 30) * Math.PI) / 180) * res.shape.r + res.shape.x, "set x");
+    assert.equal(method.y, Math.sin(((60 - 0 * 30) * Math.PI) / 180) * res.shape.r + res.shape.y, "set y");
 });
 
 
@@ -172,8 +172,8 @@ test("resourceactions.post(target) - create the post method as a child of the re
     assert.equal(method.type, 'circle');
     assert.equal(method.fill, 'black', 'black point');
     assert.equal(method.r, 3, 'radius is 5');
-    assert.equal(method.x, Math.cos( ( (60 - 1 * 30 ) * Math.PI) / 180) * res.shape.r + res.shape.x, "set x");
-    assert.equal(method.y, Math.sin( ( (60 - 1 * 30 ) *  Math.PI) / 180) * res.shape.r + res.shape.y, "set y");
+    assert.equal(method.x, Math.cos(((60 - 1 * 30 ) * Math.PI) / 180) * res.shape.r + res.shape.x, "set x");
+    assert.equal(method.y, Math.sin(((60 - 1 * 30) * Math.PI) / 180) * res.shape.r + res.shape.y, "set y");
 });
 
 
@@ -183,8 +183,8 @@ test("resourceactions.put(target) - create the put method as a child of the reso
     assert.equal(method.type, 'circle');
     assert.equal(method.fill, 'black', 'black point');
     assert.equal(method.r, 3, 'radius is 5');
-    assert.equal(method.x, Math.cos( ( (60 - 2 * 30 ) * Math.PI) / 180) * res.shape.r + res.shape.x, "set x");
-    assert.equal(method.y, Math.sin( ( (60 - 2 * 30 ) *  Math.PI) / 180) * res.shape.r + res.shape.y, "set y");
+    assert.equal(method.x, Math.cos(((60 - 2 * 30 ) * Math.PI) / 180) * res.shape.r + res.shape.x, "set x");
+    assert.equal(method.y, Math.sin(((60 - 2 * 30) * Math.PI) / 180) * res.shape.r + res.shape.y, "set y");
 });
 
 test("resourceactions.del(target) - create the delete method as a child of the resource", assert=> {
@@ -193,6 +193,16 @@ test("resourceactions.del(target) - create the delete method as a child of the r
     assert.equal(method.type, 'circle');
     assert.equal(method.fill, 'black', 'black point');
     assert.equal(method.r, 3, 'radius is 5');
-    assert.equal(method.x, Math.cos( ( (60 - 3 * 30 ) * Math.PI) / 180) * res.shape.r + res.shape.x, "set x");
-    assert.equal(method.y, Math.sin( ( (60 - 3 * 30 ) *  Math.PI) / 180) * res.shape.r + res.shape.y, "set y");
+    assert.equal(method.x, Math.cos(((60 - 3 * 30 ) * Math.PI) / 180) * res.shape.r + res.shape.x, "set x");
+    assert.equal(method.y, Math.sin(((60 - 3 * 30) * Math.PI) / 180) * res.shape.r + res.shape.y, "set y");
+});
+
+
+test("resactions.remove(target) - delete the resource with its methods or actions", assert=> {
+    var resource = new Resource({ name: "res"});
+    assert.false(res.isDeleted, 'not yet deleted');
+
+    resactions.remove(resource);
+   
+    assert.true(res.isDeleted, 'resource deleted');
 });
