@@ -913,6 +913,8 @@
 	        else
 	            obj = this.breakline(src, dest);
 
+			this.src = src.uuid;
+			this.dest =  dest.uuid;
 	        /* reference on connexion points*/
 	        this.source = src.c_points[obj.src];
 	        this.destination = dest.c_points[obj.dest];

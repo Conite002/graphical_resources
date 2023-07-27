@@ -321,7 +321,6 @@ var aya = {
           lozenge: (x, y, width, height, isdrawing, issave, uuid = undefined)=>{
              var id =  Math.random().toString(36).substring(2, 15) +
                          Math.random().toString(36).substring(2, 15); 
-             console.log(this);
              var Obj = {
                 uuid: uuid || id,
                 events: [],
@@ -446,6 +445,15 @@ var aya = {
                       vt.draw();
                    });
                 },
+                addEvent(event, callback){
+                  Obj.events[event] = callback;
+               },
+               deleteEvent(event){
+                  delete Obj.events[event];
+               },
+                makeHiddenCpoints: ()=>{},
+                makeHiddenVertex: ()=>{},
+                removeBoxFromDOM: ()=>{},
                 redraw: ()=>{
                 },
                 svg: {
@@ -564,6 +572,9 @@ var aya = {
                 text: text ? text : null,
                 draw(){},
                 redraw(){},
+                makeHiddenCpoints(){},
+                makeHiddenVertex(){},
+                removeBoxFromDOM(){},
                 setStyles: (o) => {
                   Object.keys(o).map((key ,index) => {
                      Obj.c_svg.setAttribute(key, o[key]);
