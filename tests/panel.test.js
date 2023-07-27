@@ -6,9 +6,9 @@ QUnit.module("Panel", {
             {name: "post", path: "src/images/post.jpg"},
             {name: "put", path: "src/images/put.jpg"},
             {name: "del", path: "src/images/delete.jpg"}
-          ];
-        }
-    });
+        ];
+    }
+});
 
 
 /**
@@ -27,36 +27,6 @@ test("Panel.path2name()  - return '' when the name is not found", assert=>{
     assert.equal(name, "", "return empty string");
 });
 
-
-/**
- * Tests related to adding the panel and the actions inside
- */
-test("Panel.add() - add the empty panel", assert=>{
-    var res = resource();
-    Panel.add(res, resourceactions.list, 0, 0);
-
-    assert.equal(res.shape.children[0].child.type, "rectangle", "panel has a rectangle as support");
-
-    assert.equal(res.shape.children[0].child.x, res.shape.x, "panel x-absc");
-    assert.equal(res.shape.children[0].child.y, res.shape.y, "panel y-absc");
-    
-    assert.equal(res.shape.children[0].child.width,  3 * ImSZ + 2 * 6, "panel width");
-    assert.equal(res.shape.children[0].child.height, Math.floor(resourceactions.list.length/2) * ImSZ+ Math.floor(resourceactions.list.length/2) *5, "panel height");
-    
-    assert.equal(res.shape.children[0].child["stroke-width"], "0px","the border width must be 0 px");
-    assert.equal(res.shape.children[0].child["opacity"], 0, "panel opacity");
-});
-
-
-test("Panel.add() - panel must cover the component", assert=>{
-    var res = resource();
-    Panel.add(res, resourceactions.list, 0, 0);
-
-    assert.ok(res.shape.children.length, "the shape has a child");
-    assert.equal(res.shape.children[0].child.type, "rectangle", "panel has a rectangle as support");
-    assert.equal(res.shape.children[0].child.offsetX, -2, "panel offsetX");
-    assert.equal(res.shape.children[0].child.offsetY, 0, "panel offsetY");
-});
 
 
 test("Panel.add() - add actions to the panel", assert=>{

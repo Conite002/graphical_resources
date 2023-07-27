@@ -97,9 +97,6 @@ test("Resource name - reduce text element to the resource when it's too long", a
     assert.ok(res.name.includes(textWithoutEllipsis), 'text value is in resource name');
 });
 
-
-
-
 /**
  * Test: Add mouseover and mouseleave on resource
  */
